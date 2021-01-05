@@ -33,14 +33,14 @@ export const Container = styled.div<ContainerProps>`
   ${(props) =>
     props.isFocused &&
     css`
-      color: #ff9000;
-      border-color: #ff9000;
+      color: #dd9f3c;
+      border-color: #dd9f3c;
     `}
 
   ${(props) =>
     props.isField &&
     css`
-      color: #ff9000;
+      color: #dd9f3c;
     `}
 
   input {

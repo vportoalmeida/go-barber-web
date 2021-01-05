@@ -59,7 +59,7 @@ export const Profile = styled.div`
 
     a {
       text-decoration: none;
-      color: #ff9000;
+      color: #dd9f3c;
 
       &:hover {
         opacity: 0.8;
@@ -84,7 +84,7 @@ export const Schedule = styled.div`
 
   p {
     margin-top: 0.8rem;
-    color: #ff9000;
+    color: #dd9f3c;
     display: flex;
     align-items: center;
     font-weight: 500;
@@ -98,7 +98,7 @@ export const Schedule = styled.div`
       content: '';
       width: 1px;
       height: 12px;
-      background: #ff9000;
+      background: #dd9f3c;
       margin: 0 0.8rem;
     }
   }
