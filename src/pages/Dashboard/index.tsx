@@ -20,7 +20,7 @@ import {
   Calendar,
 } from './styles';
 
-import logoImg from '../../assets/logo.svg';
+import logoImg from '../../assets/logo_sistema.svg';
 import userDefaultAvatar from '../../assets/user-circle1.png';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';

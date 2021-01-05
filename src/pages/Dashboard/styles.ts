@@ -129,7 +129,7 @@ export const NextAppointment = styled.div`
       left: 0;
       top: 10%;
       content: '';
-      background: #ff9000;
+      background: #dd9f3c;
     }
 
     img {
@@ -150,7 +150,7 @@ export const NextAppointment = styled.div`
       color: #999591;
 
       svg {
-        color: #ff9000;
+        color: #dd9f3c;
         margin-right: 0.8rem;
       }
     }
