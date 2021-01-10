@@ -139,7 +139,7 @@ const Dashboard: React.FC = () => {
       <Header>
         <HeaderContent>
           <img src={logoImg} alt="Go Barber" />
-
+          <h1>Dom Barzini </h1>
           <Profile>
             <img
               src={user.avatar_url ? user.avatar_url : userDefaultAvatar}
@@ -239,6 +239,7 @@ const Dashboard: React.FC = () => {
             ))}
           </Section>
         </Schedule>
+
         <Calendar>
           <DayPicker
             weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}

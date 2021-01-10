@@ -72,7 +72,7 @@ export const AnimationContainer = styled.div`
     align-items: center;
 
     &:hover {
-      color: ${shade(0.2, '#ff9000')};
+      color: ${shade(0.2, '#dd9f3c')};
     }
 
     svg {

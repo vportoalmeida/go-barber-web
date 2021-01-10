@@ -15,7 +15,7 @@ export const HeaderContent = styled.div`
   align-items: center;
 
   > img {
-    height: 80px;
+    height: 100px;
   }
 
   button {
@@ -42,8 +42,8 @@ export const Profile = styled.div`
   margin-left: 8rem;
 
   img {
-    width: 56px;
-    height: 56px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
   }
 
@@ -206,8 +206,8 @@ export const Appointment = styled.div`
     margin-left: 2.4rem;
 
     img {
-      width: 56px;
-      height: 56px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
     }
 
