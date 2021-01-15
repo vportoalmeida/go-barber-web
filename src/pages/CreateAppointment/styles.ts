@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import signUpBackgroundImg from '../../assets/sign-up.jpg';
 
 export const Container = styled.div`
@@ -20,6 +20,7 @@ export const HeaderContent = styled.div`
   height: 100vh;
 `;
 export const Provider = styled.div``;
+
 export const Select = styled.div`
   select {
     align-items: center;
@@ -31,6 +32,7 @@ export const Select = styled.div`
     width: 350px;
     margin-top: 10px;
     margin-bottom: 10px;
+    height: 56px;
 
     border: 2px solid #232129;
     color: #666360;

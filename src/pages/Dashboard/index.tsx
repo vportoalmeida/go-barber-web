@@ -138,7 +138,7 @@ const Dashboard: React.FC = () => {
     <Container>
       <Header>
         <HeaderContent>
-          <img src={logoImg} alt="Go Barber" />
+          {/* <img src={logoImg} alt="Go Barber" /> */}
           <h1>Dom Barzini </h1>
           <Profile>
             <img
@@ -160,6 +160,33 @@ const Dashboard: React.FC = () => {
       </Header>
 
       <Content>
+        <Calendar>
+          <DayPicker
+            weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
+            fromMonth={new Date()}
+            disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
+            modifiers={{
+              available: { daysOfWeek: [1, 2, 3, 4, 5] },
+            }}
+            onMonthChange={handleMonthChange}
+            selectedDays={selectedDate}
+            onDayClick={handleDateChange}
+            months={[
+              'Janeiro',
+              'Fevereiro',
+              'Março',
+              'Abril',
+              'Maio',
+              'Junho',
+              'Julho',
+              'Agosto',
+              'Setembro',
+              'Outubro',
+              'Novembro',
+              'Dezembro',
+            ]}
+          />
+        </Calendar>
         <Schedule>
           <h1>Horários agendados</h1>
           <p>
@@ -203,7 +230,11 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatar_url}
+                    src={
+                      appointment.user.avatar_url
+                        ? user.avatar_url
+                        : userDefaultAvatar
+                    }
                     alt={appointment.user.name}
                   />
 
@@ -239,34 +270,6 @@ const Dashboard: React.FC = () => {
             ))}
           </Section>
         </Schedule>
-
-        <Calendar>
-          <DayPicker
-            weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-            fromMonth={new Date()}
-            disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
-            modifiers={{
-              available: { daysOfWeek: [1, 2, 3, 4, 5] },
-            }}
-            onMonthChange={handleMonthChange}
-            selectedDays={selectedDate}
-            onDayClick={handleDateChange}
-            months={[
-              'Janeiro',
-              'Fevereiro',
-              'Março',
-              'Abril',
-              'Maio',
-              'Junho',
-              'Julho',
-              'Agosto',
-              'Setembro',
-              'Outubro',
-              'Novembro',
-              'Dezembro',
-            ]}
-          />
-        </Calendar>
       </Content>
     </Container>
   );

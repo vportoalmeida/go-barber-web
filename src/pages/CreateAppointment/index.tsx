@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useEffect, useState } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -18,8 +18,23 @@ import {
 } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { useAuth } from '../../hooks/auth';
 
 import logoImg from '../../assets/logo_sistema.svg';
+
+interface MonthAvailabilityItem {
+  day: number;
+  available: boolean;
+}
+interface Appointment {
+  id: string;
+  date: string;
+  hourFormatted: string;
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+}
 
 interface SignUpFormData {
   provider: string;
@@ -29,9 +44,17 @@ interface SignUpFormData {
 }
 
 const CreateAppointment: React.FC = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [monthAvailability, setMonthAvailability] = useState<
+    MonthAvailabilityItem[]
+  >([]);
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
+  const { signOut, user } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
