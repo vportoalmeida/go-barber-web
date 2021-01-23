@@ -4,23 +4,29 @@ import { shade } from 'polished';
 export const Container = styled.div``;
 
 export const Header = styled.header`
-  padding: 3.2rem 0;
+  padding: 2.2rem;
   background: #28262e;
+  align-items: center;
   display: flex;
+  margin-left: 0 auto;
 `;
 
 export const HeaderContent = styled.div`
-  max-width: 1200px;
-  margin-left: 40px;
+  max-width: 1900px;
+  width: 1500px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
   > img {
     height: 100px;
   }
 
+  > h1 {
+    margin-left: 50px;
+  }
+
   button {
-    margin-inline-start: 100%;
     background: transparent;
     border: 0;
 
@@ -40,8 +46,8 @@ export const HeaderContent = styled.div`
 export const Profile = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 8rem;
   margin-right: 0 auto;
+  justify-content: space-between;
 
   img {
     width: 80px;
@@ -72,10 +78,11 @@ export const Profile = styled.div`
 `;
 
 export const Content = styled.main`
-  max-width: 12000px;
+  max-width: 1200px;
   margin-top: 50px;
   margin-left: 50px;
   display: flex;
+  justify-content: space-between;
 `;
 
 export const Schedule = styled.div`

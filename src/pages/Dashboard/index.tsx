@@ -174,7 +174,11 @@ const Dashboard: React.FC = () => {
 
               <div>
                 <img
-                  src={nextAppointment.user.avatar_url}
+                  src={
+                    nextAppointment.user.avatar_url
+                      ? user.avatar_url
+                      : userDefaultAvatar
+                  }
                   alt={nextAppointment.user.name}
                 />
 
