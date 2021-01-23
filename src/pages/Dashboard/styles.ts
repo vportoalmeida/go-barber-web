@@ -11,7 +11,7 @@ export const Header = styled.header`
 
 export const HeaderContent = styled.div`
   max-width: 1200px;
-  margin: auto;
+  margin-left: 40px;
   display: flex;
   align-items: center;
 
@@ -20,7 +20,7 @@ export const HeaderContent = styled.div`
   }
 
   button {
-    margin-left: auto;
+    margin-inline-start: 100%;
     background: transparent;
     border: 0;
 
@@ -41,7 +41,7 @@ export const Profile = styled.div`
   display: flex;
   align-items: center;
   margin-left: 8rem;
-  margin-right: 20px;
+  margin-right: 0 auto;
 
   img {
     width: 80px;
@@ -72,15 +72,17 @@ export const Profile = styled.div`
 `;
 
 export const Content = styled.main`
-  max-width: 900px;
-  margin: 6.4rem auto;
-  display: column;
+  max-width: 12000px;
+  margin-top: 50px;
+  margin-left: 50px;
+  display: flex;
 `;
 
 export const Schedule = styled.div`
+  max-width: 500px;
   margin-top: 15px;
   margin-left: 10px;
-  position: absolute;
+  position: relative;
   flex: 1;
   margin-right: 10rem;
 
@@ -229,7 +231,7 @@ export const Appointment = styled.div`
 
 export const Calendar = styled.aside`
   width: 380px;
-  margin: 0 auto;
+  margin-left: 10px;
   padding: 0px;
 
   .DayPicker {
