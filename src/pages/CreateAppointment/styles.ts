@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components';
+import { shade } from 'polished';
+
 import signUpBackgroundImg from '../../assets/sign-up.jpg';
 
 export const Container = styled.div`
@@ -12,12 +14,41 @@ export const Header = styled.div`
   background: #28262e;
 `;
 export const HeaderContent = styled.div`
+  max-width: 600px;
   width: 600px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: 190vh;
+  max-height: 1200px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  form {
+    margin: 4rem 0;
+    width: 340px;
+    text-align: center;
+
+    h1 {
+      margin-bottom: 2.4rem;
+    }
+
+    a {
+      color: #f4ede8;
+      display: block;
+      margin-top: 2.4rem;
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover {
+        color: ${shade(0.2, '#f4ede8')};
+      }
+    }
+  }
 `;
 export const Provider = styled.div``;
 
@@ -29,10 +60,11 @@ export const Select = styled.div`
     padding: 1.6rem;
     border-radius: 10px;
     text-align: left;
-    width: 350px;
+    width: 340px;
     margin-top: 10px;
     margin-bottom: 10px;
     height: 56px;
+    font-size: 1.6rem;
 
     border: 2px solid #232129;
     color: #666360;
@@ -44,6 +76,11 @@ export const Select = styled.div`
       margin-top: 0.8rem;
     }
   }
+`;
+
+export const AgendaSelect = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 export const Background = styled.div`

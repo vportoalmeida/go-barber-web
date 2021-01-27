@@ -6,7 +6,7 @@ import { FiPower, FiClock } from 'react-icons/fi';
 
 import 'react-day-picker/lib/style.css';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -24,6 +24,7 @@ import logoImg from '../../assets/logo_sistemadash.svg';
 import userDefaultAvatar from '../../assets/user-circle1.png';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
+import Button from '../../components/Button';
 
 interface MonthAvailabilityItem {
   day: number;
@@ -50,6 +51,8 @@ const Dashboard: React.FC = () => {
 
   const { signOut, user } = useAuth();
 
+  const history = useHistory();
+
   const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
     if (modifiers.available && !modifiers.disabled) {
       setSelectedDate(day);
@@ -58,6 +61,9 @@ const Dashboard: React.FC = () => {
 
   const handleMonthChange = useCallback((month: Date) => {
     setCurrentMonth(month);
+  }, []);
+  const handleNav = useCallback(() => {
+    history.push('/appointment');
   }, []);
 
   useEffect(() => {
@@ -158,15 +164,19 @@ const Dashboard: React.FC = () => {
           </button>
         </HeaderContent>
       </Header>
-
       <Content>
         <Schedule>
           <h1>Horários agendados</h1>
+
           <p>
             {isToday(selectedDate) && <span>Hoje</span>}
             <span>{selectedDateAsText}</span>
             <span>{selectedWeekDay}</span>
           </p>
+
+          <Button type="button" onClick={handleNav}>
+            Novo Agendamento
+          </Button>
 
           {isToday(selectedDate) && nextAppointment && (
             <NextAppointment>
@@ -249,6 +259,7 @@ const Dashboard: React.FC = () => {
             ))}
           </Section>
         </Schedule>
+
         <Calendar>
           <DayPicker
             weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}

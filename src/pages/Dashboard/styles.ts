@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
+import 'px2vw';
 
 export const Container = styled.div``;
 
@@ -14,6 +15,7 @@ export const Header = styled.header`
 export const HeaderContent = styled.div`
   max-width: 1900px;
   width: 1500px;
+  width: ${px2vw(32)};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -189,6 +191,22 @@ export const Section = styled.section`
 
   > p {
     color: #999591;
+  }
+`;
+export const BtnAgendar = styled.section`
+  background: #dd9f3c;
+  height: 56px;
+  width: 120px;
+  border-radius: 10px;
+  border: 0;
+  padding: 0 1.6rem;
+  color: #312e38;
+  font-weight: 500;
+  margin-top: 1.6rem;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: ${shade(0.2, '#dd9f3c')};
   }
 `;
 

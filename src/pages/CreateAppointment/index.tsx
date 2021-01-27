@@ -1,9 +1,15 @@
-import React, { useCallback, useRef, useEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useRef,
+  useEffect,
+  useState,
+  useMemo,
+} from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { FiCalendar, FiUser } from 'react-icons/fi';
-import { useHistory } from 'react-router-dom';
+import { FiCalendar, FiUser, FiClock, FiArrowLeft } from 'react-icons/fi';
+import { Link, useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 
@@ -15,6 +21,7 @@ import {
   Provider,
   Select,
   Background,
+  AgendaSelect,
 } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -26,6 +33,11 @@ interface MonthAvailabilityItem {
   day: number;
   available: boolean;
 }
+
+interface ProviderItem {
+  name: string;
+}
+
 interface Appointment {
   id: string;
   date: string;
@@ -49,12 +61,20 @@ const CreateAppointment: React.FC = () => {
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
   >([]);
+  const [providers, setProvider] = useState<ProviderItem[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
 
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
   const { signOut, user } = useAuth();
+
+  useEffect(() => {
+    api.get('/providers').then((response) => {
+      setProvider(response.data);
+      console.log(response.data);
+    });
+  }, [providers]);
 
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
@@ -91,6 +111,13 @@ const CreateAppointment: React.FC = () => {
     },
     [addToast, history],
   );
+
+  const providersList = useMemo(() => {
+    return providers.filter((provider) => {
+      return provider.name;
+    });
+  }, [providers]);
+
   return (
     <Container>
       <Header>
@@ -106,17 +133,11 @@ const CreateAppointment: React.FC = () => {
             >
               <Select>
                 <select placeholder="Profissional">
-                  <option>Barbeiro 1</option>
-                  <option>Barbeiro 2</option>
-                  <option>Barbeiro 3</option>
+                  {providersList.map((provider) => (
+                    <option>{provider.name}</option>
+                  ))}
                 </select>
               </Select>
-              <Input
-                name="name"
-                icon={FiUser}
-                type="text"
-                placeholder="Cliente"
-              />
 
               <Input
                 name="data"
@@ -124,15 +145,30 @@ const CreateAppointment: React.FC = () => {
                 type="date"
                 placeholder="Data"
               />
-              <Select>
+              <Input
+                name="Hora"
+                icon={FiClock}
+                type="time"
+                placeholder="Hora"
+              />
+              {/* <Select>
                 <select placeholder="Hora">
                   <option placeholder="8h">8</option>
                   <option>9</option>
                   <option>10</option>
                 </select>
-              </Select>
-
+              </Select> */}
+              <Input
+                name="name"
+                icon={FiUser}
+                type="text"
+                placeholder="Cliente"
+              />
               <Button type="submit">Agendar</Button>
+              <Link to="/dashboard">
+                <FiArrowLeft />
+                Voltar
+              </Link>
             </Form>
           </Provider>
         </HeaderContent>
