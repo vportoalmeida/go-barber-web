@@ -238,7 +238,7 @@ export const Appointment = styled.div`
     align-items: center;
     padding: 1.6rem 2.4rem;
     border-radius: 1rem;
-    margin-left: 2.4rem;
+    margin-left: 1.4rem;
 
     img {
       width: 80px;
