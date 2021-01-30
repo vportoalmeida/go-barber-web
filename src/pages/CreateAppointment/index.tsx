@@ -21,7 +21,6 @@ import {
   Provider,
   Select,
   Background,
-  AgendaSelect,
 } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
