@@ -1,20 +1,25 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
-
-import signUpBackgroundImg from '../../assets/sign-up.jpg';
+import signUpBackgroundImg from '../../assets/sign-in-background.png';
 
 export const Container = styled.div`
   display: flex;
   align-items: stretch;
-  width: 100%;
+  /* width: 100%; */
+  @media (max-width: 200px) {
+    width: 100px;
+    height: 100px;
+    flex-direction: row;
+  }
 `;
 
 export const Header = styled.div`
   padding: 32px 0;
   background: #28262e;
 `;
+
 export const HeaderContent = styled.div`
-  max-width: 600px;
+  max-width: 900px;
   width: 600px;
   margin: 0 auto;
   display: flex;

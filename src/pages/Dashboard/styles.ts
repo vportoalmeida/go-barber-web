@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
-import 'px2vw';
 
 export const Container = styled.div``;
 
@@ -15,7 +14,6 @@ export const Header = styled.header`
 export const HeaderContent = styled.div`
   max-width: 1900px;
   width: 1500px;
-  width: ${px2vw(32)};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,7 +23,7 @@ export const HeaderContent = styled.div`
   }
 
   > h1 {
-    margin-left: 50px;
+    margin-left: 20px;
   }
 
   button {
@@ -36,6 +34,7 @@ export const HeaderContent = styled.div`
       color: #999591;
       width: 20px;
       height: 20px;
+      margin-left: 10px;
       transition: color 0.2s;
 
       &:hover {
@@ -61,7 +60,7 @@ export const Profile = styled.div`
   div {
     display: flex;
     flex-direction: column;
-    margin-left: 1.6rem;
+    margin-left: 1.8rem;
     line-height: 2.4rem;
 
     span {
@@ -80,21 +79,22 @@ export const Profile = styled.div`
 `;
 
 export const Content = styled.main`
-  max-width: 1200px;
+  max-width: 1500px;
   margin-top: 50px;
-  margin-left: 50px;
+  margin-left: 20px;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
 export const Schedule = styled.div`
-  max-width: 500px;
+  max-width: 600px;
   margin-top: 15px;
   margin-left: 10px;
   position: relative;
   flex: 1;
-  margin-right: 10rem;
-
+  margin-right: 5rem;
+  margin-bottom: 50px;
   h1 {
     font-size: 3.6rem;
   }
@@ -255,8 +255,6 @@ export const Appointment = styled.div`
 `;
 
 export const Calendar = styled.aside`
-  width: 380px;
-  margin-left: 10px;
   padding: 0px;
 
   .DayPicker {
