@@ -11,7 +11,7 @@ interface ContainerProps {
 export const Container = styled.div<ContainerProps>`
   background: #232129;
   border-radius: 10px;
-  padding: 1.6rem;
+  padding: 1.5rem;
   width: 100%;
 
   border: 2px solid #232129;
@@ -33,14 +33,14 @@ export const Container = styled.div<ContainerProps>`
   ${(props) =>
     props.isFocused &&
     css`
-      color: #ff9000;
-      border-color: #ff9000;
+      color: #dd9f3c;
+      border-color: #dd9f3c;
     `}
 
   ${(props) =>
     props.isField &&
     css`
-      color: #ff9000;
+      color: #dd9f3c;
     `}
 
   input {

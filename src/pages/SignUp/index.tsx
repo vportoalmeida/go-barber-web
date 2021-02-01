@@ -11,7 +11,7 @@ import { useToast } from '../../hooks/toast';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
-import logoImg from '../../assets/logo.svg';
+import logoImg from '../../assets/logo_sistema.svg';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -47,7 +47,7 @@ const SignUp: React.FC = () => {
           abortEarly: false,
         });
 
-        await api.post('users', data);
+        await api.post('appointments', data);
 
         history.push('/');
 
