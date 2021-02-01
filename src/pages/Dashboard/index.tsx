@@ -20,7 +20,6 @@ import {
   Calendar,
 } from './styles';
 
-import logoImg from '../../assets/logo_sistemadash.svg';
 import userDefaultAvatar from '../../assets/user-circle1.png';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -40,10 +39,16 @@ interface Appointment {
     avatar_url: string;
   };
 }
+interface AvailabilityItem {
+  hour: number;
+  available: boolean;
+}
 
 const Dashboard: React.FC = () => {
+  const [availability, setAvailability] = useState<AvailabilityItem[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [selectedHour, setSelectedHour] = useState(0);
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
   >([]);
@@ -62,8 +67,13 @@ const Dashboard: React.FC = () => {
   const handleMonthChange = useCallback((month: Date) => {
     setCurrentMonth(month);
   }, []);
+
   const handleNav = useCallback(() => {
     history.push('/appointment');
+  }, [history]);
+
+  const handleSelectHour = useCallback((hour: number) => {
+    setSelectedHour(hour);
   }, []);
 
   useEffect(() => {
@@ -99,6 +109,30 @@ const Dashboard: React.FC = () => {
         setAppointments(appointmentsFormatted);
       });
   }, [selectedDate]);
+
+  const morningAvailability = useMemo(() => {
+    return availability
+      .filter(({ hour }) => hour < 12)
+      .map(({ hour, available }) => {
+        return {
+          hour,
+          available,
+          hourFormatted: format(new Date().setHours(hour), 'HH:00'),
+        };
+      });
+  }, [availability]);
+
+  const afternoonAvailability = useMemo(() => {
+    return availability
+      .filter(({ hour }) => hour >= 12)
+      .map(({ hour, available }) => {
+        return {
+          hour,
+          available,
+          hourFormatted: format(new Date().setHours(hour), 'HH:00'),
+        };
+      });
+  }, [availability]);
 
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
