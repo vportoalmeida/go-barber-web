@@ -20,7 +20,6 @@ import {
   Calendar,
 } from './styles';
 
-import logoImg from '../../assets/logo_sistemadash.svg';
 import userDefaultAvatar from '../../assets/user-circle1.png';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -71,7 +70,7 @@ const Dashboard: React.FC = () => {
 
   const handleNav = useCallback(() => {
     history.push('/appointment');
-  }, []);
+  }, [history]);
 
   const handleSelectHour = useCallback((hour: number) => {
     setSelectedHour(hour);
