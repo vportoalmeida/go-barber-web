@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  @media (max-width: 720px) {
+    flex-wrap: nowrap;
+    margin: auto;
+  }
+`;
 
 export const Header = styled.header`
   padding: 3.2rem 0;
@@ -69,6 +74,7 @@ export const Profile = styled.div`
 `;
 
 export const Content = styled.main`
+  flex-wrap: wrap;
   max-width: 1120px;
   margin: 6.4rem auto;
   display: flex;
