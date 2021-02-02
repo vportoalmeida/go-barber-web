@@ -23,18 +23,6 @@ import {
   Provider,
   Select,
   Background,
-<<<<<<< HEAD
-  AgendaSelect,
-  Calendar,
-  Schedule,
-  Section,
-  Title,
-  SectionTitle,
-  SectionContent,
-  Hour,
-  HourText,
-=======
->>>>>>> 05b4f19acc9154eecee61bcbc29dc7277985267e
 } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
