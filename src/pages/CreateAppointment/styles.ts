@@ -21,36 +21,97 @@ interface HourTextProps {
 }
 
 export const Container = styled.div`
-  display: flex;
-  align-items: stretch;
   /* width: 100%; */
-  @media (max-width: 200px) {
-    width: 100px;
-    height: 100px;
-    flex-direction: row;
-  }
 `;
-
-export const Header = styled.div`
-  padding: 32px 0;
+export const Header = styled.header`
+  padding: 2.2rem;
   background: #28262e;
+  align-items: center;
+  display: flex;
+  margin-left: 0 auto;
+  min-width: 550px;
 `;
 
 export const HeaderContent = styled.div`
+  max-width: 1900px;
+  width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 0 auto;
+
+  > img {
+    height: 100px;
+  }
+
+  > h1 {
+    margin-left: 20px;
+  }
+
+  button {
+    background: transparent;
+    border: 0;
+
+    svg {
+      color: #999591;
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: ${shade(0.2, '#999591')};
+      }
+    }
+  }
+`;
+
+export const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 0 auto;
+  justify-content: space-between;
+  min-width: 350px;
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.8rem;
+    line-height: 2.4rem;
+
+    span {
+      color: #f4ede8;
+    }
+
+    a {
+      text-decoration: none;
+      color: #dd9f3c;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+`;
+
+export const Body = styled.div`
+  margin-top: 10rem;
+`;
+
+export const BodyContent = styled.div`
   max-width: 900px;
-  width: 600px;
-  margin: 0 auto;
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 190vh;
-  max-height: 1200px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+  margin-left: 10rem;
+  margin-right: 10px;
   form {
     margin: 4rem 0;
     width: 340px;
@@ -85,8 +146,7 @@ export const Select = styled.div`
     padding: 1.6rem;
     border-radius: 10px;
     text-align: left;
-    width: 340px;
-    margin-top: 10px;
+    width: 350px;
     margin-bottom: 10px;
     height: 56px;
     font-size: 1.6rem;
@@ -95,7 +155,6 @@ export const Select = styled.div`
     color: #666360;
 
     display: flex;
-    align-items: center;
 
     & + div {
       margin-top: 0.8rem;
@@ -120,6 +179,7 @@ export const Calendar = styled.aside`
   width: 560px;
   height: 500px;
   margin-top: 50px;
+  text-align: left;
 
   .DayPicker {
     background: #28262e;
