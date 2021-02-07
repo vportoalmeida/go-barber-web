@@ -92,7 +92,6 @@ const CreateAppointment: React.FC = () => {
     MonthAvailabilityItem[]
   >([]);
 
-  // const [providers, setProvider] = useState<ProviderItem[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
 
   const { params } = useRouteMatch<RouteParams>();
@@ -110,15 +109,58 @@ const CreateAppointment: React.FC = () => {
     });
   }, []);
 
-  const selectedProviders = useMemo(() => {
-    return providers.find((provider) => {
-      return provider.id;
-    });
-  }, [providers]);
+  useEffect(() => {
+    console.log('SelectedProvider: ', selectedProvider);
+    api
+      .get<AvailabilityItem[]>(
+        `providers/${selectedProvider}/day-availability`,
+        {
+          params: {
+            year: selectedDate.getFullYear(),
+            month: selectedDate.getMonth() + 1,
+            day: selectedDate.getDate(),
+          },
+        },
+      )
+      .then(({ data }) => {
+        setAvailability(data);
+      });
+  }, [selectedDate, selectedProvider]);
 
-  const handleToggleDatePicker = useCallback(() => {
-    setShowDatePicker((state) => !state);
-  }, []);
+  useEffect(() => {
+    api
+      .get<Appointment[]>('/appointments/me', {
+        params: {
+          year: selectedDate.getFullYear(),
+          month: selectedDate.getMonth() + 1,
+          day: selectedDate.getDate(),
+        },
+      })
+      .then((response) => {
+        const appointmentsFormatted = response.data.map((appointment) => {
+          return {
+            ...appointment,
+            hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
+          };
+        });
+
+        setAppointments(appointmentsFormatted);
+      });
+  }, [selectedDate]);
+
+  useEffect(() => {
+    api
+      .get(`/providers/${user.id}/month-availability`, {
+        params: {
+          year: currentMonth.getFullYear(),
+          month: currentMonth.getMonth() + 1,
+        },
+      })
+      .then((response) => {
+        setMonthAvailability(response.data);
+        console.log(response.data);
+      });
+  }, [currentMonth, user.id]);
 
   const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
     if (modifiers.available && !modifiers.disabled) {
@@ -130,17 +172,52 @@ const CreateAppointment: React.FC = () => {
     setCurrentMonth(month);
   }, []);
 
-  const handleSelectProvider = useCallback((providerId: string) => {
-    setSelectedProvider(providerId);
+  const handleSelectProvider = useCallback((event: any) => {
+    console.log('Provider ID: ', event.target.value);
+    setSelectedProvider(event.target.value);
   }, []);
 
   const handleSelectHour = useCallback((hour: number) => {
     setSelectedHour(hour);
   }, []);
 
-  const handleDateChanged = useCallback((date: Date) => {
-    setSelectedDate(date);
-  }, []);
+  const morningAvailability = useMemo(() => {
+    return availability
+      .filter(({ hour }) => hour < 12)
+      .map(({ hour, available }) => {
+        return {
+          hour,
+          available,
+          hourFormatted: format(new Date().setHours(hour), 'HH:00'),
+        };
+      });
+  }, [availability]);
+  console.log('Morning ', morningAvailability);
+  const afternoonAvailability = useMemo(() => {
+    return availability
+      .filter(({ hour }) => hour >= 12)
+      .map(({ hour, available }) => {
+        return {
+          hour,
+          available,
+          hourFormatted: format(new Date().setHours(hour), 'HH:00'),
+        };
+      });
+  }, [availability]);
+
+  const disabledDays = useMemo(() => {
+    const dates = monthAvailability
+      .filter((monthDay) => monthDay.available === false)
+      .map((monthDay) => {
+        const year = currentMonth.getFullYear();
+        const month = currentMonth.getMonth();
+        const date = new Date(year, month, monthDay.day);
+
+        return date;
+      });
+
+    return dates;
+  }, [currentMonth, monthAvailability]);
 
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
@@ -178,85 +255,7 @@ const CreateAppointment: React.FC = () => {
     [addToast, history],
   );
 
-  useEffect(() => {
-    api
-      .get(`/providers/${user.id}/month-availability`, {
-        params: {
-          year: currentMonth.getFullYear(),
-          month: currentMonth.getMonth() + 1,
-        },
-      })
-      .then((response) => {
-        setMonthAvailability(response.data);
-        console.log(response.data);
-      });
-  }, [currentMonth, user.id]);
-
-  useEffect(() => {
-    api
-      .get<Appointment[]>('/appointments/me', {
-        params: {
-          year: selectedDate.getFullYear(),
-          month: selectedDate.getMonth() + 1,
-          day: selectedDate.getDate(),
-        },
-      })
-      .then((response) => {
-        const appointmentsFormatted = response.data.map((appointment) => {
-          return {
-            ...appointment,
-            hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
-          };
-        });
-
-        setAppointments(appointmentsFormatted);
-      });
-  }, [selectedDate]);
-
-  const morningAvailability = useMemo(() => {
-    return availability
-      .filter(({ hour }) => hour < 12)
-      .map(({ hour, available }) => {
-        return {
-          hour,
-          available,
-          hourFormatted: format(new Date().setHours(hour), 'HH:00'),
-        };
-      });
-  }, [availability]);
-
-  const afternoonAvailability = useMemo(() => {
-    return availability
-      .filter(({ hour }) => hour >= 12)
-      .map(({ hour, available }) => {
-        return {
-          hour,
-          available,
-          hourFormatted: format(new Date().setHours(hour), 'HH:00'),
-        };
-      });
-  }, [availability]);
-
-  const disabledDays = useMemo(() => {
-    const dates = monthAvailability
-      .filter((monthDay) => monthDay.available === false)
-      .map((monthDay) => {
-        const year = currentMonth.getFullYear();
-        const month = currentMonth.getMonth();
-        const date = new Date(year, month, monthDay.day);
-
-        return date;
-      });
-
-    return dates;
-  }, [currentMonth, monthAvailability]);
-
-  const providersList = useMemo(() => {
-    return providers.filter((provider) => {
-      return provider.name;
-    });
-  }, [providers]);
-
+  console.log('Providers', providers);
   return (
     <Container>
       <Header>
@@ -271,9 +270,13 @@ const CreateAppointment: React.FC = () => {
               onSubmit={handleSubmit}
             >
               <Select>
-                <select placeholder="Profissional">
-                  {providersList.map((provider) => (
-                    <option onSelect={() => handleSelectProvider(provider.id)}>
+                <select
+                  placeholder="Profissional"
+                  value={selectedProvider}
+                  onChange={handleSelectProvider}
+                >
+                  {providers.map((provider) => (
+                    <option value={provider.id} key={provider.id}>
                       {provider.name}
                     </option>
                   ))}
