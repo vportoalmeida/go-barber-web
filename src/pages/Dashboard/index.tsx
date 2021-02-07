@@ -19,6 +19,7 @@ import {
   Section,
   Appointment,
   Calendar,
+  ButtonApointment,
 } from './styles';
 
 import userDefaultAvatar from '../../assets/user-circle1.png';
@@ -208,10 +209,11 @@ const Dashboard: React.FC = () => {
             <span>{selectedDateAsText}</span>
             <span>{selectedWeekDay}</span>
           </p>
-
-          <Button type="button" onClick={handleNav}>
-            Novo Agendamento
-          </Button>
+          <ButtonApointment>
+            <Button type="button" onClick={handleNav}>
+              Novo Agendamento
+            </Button>
+          </ButtonApointment>
 
           {isToday(selectedDate) && nextAppointment && (
             <NextAppointment>

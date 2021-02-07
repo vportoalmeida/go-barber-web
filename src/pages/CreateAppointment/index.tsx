@@ -10,7 +10,7 @@ import React, {
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { FiCalendar, FiUser, FiClock, FiArrowLeft } from 'react-icons/fi';
+import { FiPower, FiArrowLeft } from 'react-icons/fi';
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import { format, parseISO } from 'date-fns';
@@ -24,8 +24,6 @@ import {
   HeaderContent,
   Provider,
   Select,
-  Background,
-  AgendaSelect,
   Calendar,
   Schedule,
   Section,
@@ -34,12 +32,13 @@ import {
   SectionContent,
   Hour,
   HourText,
+  Profile,
+  Body,
+  BodyContent,
 } from './styles';
-import Input from '../../components/Input';
+import userDefaultAvatar from '../../assets/user-circle1.png';
 import Button from '../../components/Button';
 import { useAuth } from '../../hooks/auth';
-
-import logoImg from '../../assets/logo_sistema.svg';
 
 interface MonthAvailabilityItem {
   day: number;
@@ -260,9 +259,30 @@ const CreateAppointment: React.FC = () => {
     <Container>
       <Header>
         <HeaderContent>
-          <img src={logoImg} alt="DonBarzini" />
-          <h1>Agendamento</h1>
+          {/* <img src={logoImg} alt="Go Barber" /> */}
+          <h1>Dom Barzini </h1>
+          <Profile>
+            <img
+              src={user.avatar_url ? user.avatar_url : userDefaultAvatar}
+              alt={user.name}
+            />
+            <div>
+              <span>Bem-vindo,</span>
+              <Link to="/profile">
+                <strong>{user.name}</strong>
+              </Link>
+            </div>
+          </Profile>
+
+          <button type="button" onClick={signOut}>
+            <FiPower />
+          </button>
+        </HeaderContent>
+      </Header>
+      <Body>
+        <BodyContent>
           <Provider>
+            <Title>Escolha o provider</Title>
             <Form
               ref={formRef}
               noValidate
@@ -282,7 +302,6 @@ const CreateAppointment: React.FC = () => {
                   ))}
                 </select>
               </Select>
-
               <Calendar>
                 <Title>Escolha a data</Title>
                 <DayPicker
@@ -311,53 +330,6 @@ const CreateAppointment: React.FC = () => {
                   ]}
                 />
               </Calendar>
-
-              <Schedule>
-                <Title>Escolha o horário</Title>
-
-                <Section>
-                  <SectionTitle>Manhã</SectionTitle>
-
-                  <SectionContent>
-                    {morningAvailability.map(
-                      ({ hourFormatted, available, hour }) => (
-                        <Hour
-                          enabled={available}
-                          selected={selectedHour === hour}
-                          available={available}
-                          key={hourFormatted}
-                          onClick={() => handleSelectHour(hour)}
-                        >
-                          <HourText selected={selectedHour === hour}>
-                            {hourFormatted}
-                          </HourText>
-                        </Hour>
-                      ),
-                    )}
-                  </SectionContent>
-                </Section>
-                <Section>
-                  <SectionTitle>Tarde</SectionTitle>
-
-                  <SectionContent>
-                    {afternoonAvailability.map(
-                      ({ hourFormatted, available, hour }) => (
-                        <Hour
-                          enabled={available}
-                          selected={selectedHour === hour}
-                          available={available}
-                          key={hourFormatted}
-                          onClick={() => handleSelectHour(hour)}
-                        >
-                          <HourText selected={selectedHour === hour}>
-                            {hourFormatted}
-                          </HourText>
-                        </Hour>
-                      ),
-                    )}
-                  </SectionContent>
-                </Section>
-              </Schedule>
               <Button type="submit">Agendar</Button>
               <Link to="/dashboard">
                 <FiArrowLeft />
@@ -365,9 +337,54 @@ const CreateAppointment: React.FC = () => {
               </Link>
             </Form>
           </Provider>
-        </HeaderContent>
-      </Header>
-      <Background />
+          <Schedule>
+            <Title>Escolha o horário</Title>
+
+            <Section>
+              <SectionTitle>Manhã</SectionTitle>
+
+              <SectionContent>
+                {morningAvailability.map(
+                  ({ hourFormatted, available, hour }) => (
+                    <Hour
+                      enabled={available}
+                      selected={selectedHour === hour}
+                      available={available}
+                      key={hourFormatted}
+                      onChange={() => handleSelectHour(hour)}
+                    >
+                      <HourText selected={selectedHour === hour}>
+                        {hourFormatted}
+                      </HourText>
+                    </Hour>
+                  ),
+                )}
+              </SectionContent>
+            </Section>
+            <Section>
+              <SectionTitle>Tarde</SectionTitle>
+
+              <SectionContent>
+                {afternoonAvailability.map(
+                  ({ hourFormatted, available, hour }) => (
+                    <Hour
+                      enabled={available}
+                      selected={selectedHour === hour}
+                      available={available}
+                      key={hourFormatted}
+                      onChange={() => handleSelectHour(hour)}
+                    >
+                      <HourText selected={selectedHour === hour}>
+                        {hourFormatted}
+                      </HourText>
+                    </Hour>
+                  ),
+                )}
+              </SectionContent>
+            </Section>
+          </Schedule>
+        </BodyContent>
+      </Body>
     </Container>
   );
 };
