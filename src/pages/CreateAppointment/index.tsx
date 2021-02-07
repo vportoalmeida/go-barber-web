@@ -109,21 +109,23 @@ const CreateAppointment: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log('SelectedProvider: ', selectedProvider);
-    api
-      .get<AvailabilityItem[]>(
-        `providers/${selectedProvider}/day-availability`,
-        {
-          params: {
-            year: selectedDate.getFullYear(),
-            month: selectedDate.getMonth() + 1,
-            day: selectedDate.getDate(),
+    if (selectedProvider && selectedProvider !== '') {
+      console.log('SelectedProvider: ', selectedProvider);
+      api
+        .get<AvailabilityItem[]>(
+          `providers/${selectedProvider}/day-availability`,
+          {
+            params: {
+              year: selectedDate.getFullYear(),
+              month: selectedDate.getMonth() + 1,
+              day: selectedDate.getDate(),
+            },
           },
-        },
-      )
-      .then(({ data }) => {
-        setAvailability(data);
-      });
+        )
+        .then(({ data }) => {
+          setAvailability(data);
+        });
+    }
   }, [selectedDate, selectedProvider]);
 
   useEffect(() => {
@@ -177,6 +179,7 @@ const CreateAppointment: React.FC = () => {
   }, []);
 
   const handleSelectHour = useCallback((hour: number) => {
+    console.log('SomeHour: ', hour);
     setSelectedHour(hour);
   }, []);
 
@@ -295,6 +298,9 @@ const CreateAppointment: React.FC = () => {
                   value={selectedProvider}
                   onChange={handleSelectProvider}
                 >
+                  <option value="" key="">
+                    Selecione o Prestador de servico
+                  </option>
                   {providers.map((provider) => (
                     <option value={provider.id} key={provider.id}>
                       {provider.name}
@@ -351,7 +357,7 @@ const CreateAppointment: React.FC = () => {
                       selected={selectedHour === hour}
                       available={available}
                       key={hourFormatted}
-                      onChange={() => handleSelectHour(hour)}
+                      onClick={() => handleSelectHour(hour)}
                     >
                       <HourText selected={selectedHour === hour}>
                         {hourFormatted}
@@ -372,7 +378,7 @@ const CreateAppointment: React.FC = () => {
                       selected={selectedHour === hour}
                       available={available}
                       key={hourFormatted}
-                      onChange={() => handleSelectHour(hour)}
+                      onClick={() => handleSelectHour(hour)}
                     >
                       <HourText selected={selectedHour === hour}>
                         {hourFormatted}
