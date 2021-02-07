@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
   useCallback,
   useRef,
@@ -35,7 +37,6 @@ import {
   BodyContent,
 } from './styles';
 import userDefaultAvatar from '../../assets/user-circle1.png';
-import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { useAuth } from '../../hooks/auth';
 
@@ -298,7 +299,6 @@ const CreateAppointment: React.FC = () => {
                   ))}
                 </select>
               </Select>
-
               <Calendar>
                 <Title>Escolha a data</Title>
                 <DayPicker
@@ -327,7 +327,6 @@ const CreateAppointment: React.FC = () => {
                   ]}
                 />
               </Calendar>
-
               <Button type="submit">Agendar</Button>
               <Link to="/dashboard">
                 <FiArrowLeft />
@@ -335,7 +334,6 @@ const CreateAppointment: React.FC = () => {
               </Link>
             </Form>
           </Provider>
-
           <Schedule>
             <Title>Escolha o horário</Title>
 

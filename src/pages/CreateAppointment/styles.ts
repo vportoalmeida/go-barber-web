@@ -102,14 +102,14 @@ export const Profile = styled.div`
 `;
 
 export const Body = styled.div`
-  margin-top: 10rem;
+  margin-top: 8rem;
 `;
 
 export const BodyContent = styled.div`
   max-width: 900px;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   margin-left: 10rem;
   margin-right: 10px;
   form {
