@@ -91,6 +91,8 @@ const CreateAppointment: React.FC = () => {
     MonthAvailabilityItem[]
   >([]);
 
+  const [isFocused, setIsFocused] = useState(false);
+
   // const [providers, setProvider] = useState<ProviderItem[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
 
@@ -114,6 +116,7 @@ const CreateAppointment: React.FC = () => {
       return provider.id;
     });
   }, [providers]);
+  const handleInputFocus = useCallback(() => setIsFocused(true), []);
 
   const handleToggleDatePicker = useCallback(() => {
     setShowDatePicker((state) => !state);
@@ -283,50 +286,73 @@ const CreateAppointment: React.FC = () => {
       <Body>
         <BodyContent>
           <Provider>
-            <Title>Escolha o provider</Title>
+            <Title>Escolha o profissional</Title>
             <Form
               ref={formRef}
               noValidate
               autoComplete="off"
               onSubmit={handleSubmit}
             >
-              <Select>
+              <Select isFocused={isFocused}>
                 <select placeholder="Profissional">
                   {providersList.map((provider) => (
-                    <option onSelect={() => handleSelectProvider(provider.id)}>
+                    <option
+                      key={provider.id}
+                      value={provider.id}
+                      onScroll={handleInputFocus}
+                      onSelect={() => handleSelectProvider(provider.id)}
+                    >
                       {provider.name}
                     </option>
                   ))}
                 </select>
               </Select>
-              <Calendar>
-                <Title>Escolha a data</Title>
-                <DayPicker
-                  weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-                  fromMonth={new Date()}
-                  disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
-                  modifiers={{
-                    available: { daysOfWeek: [1, 2, 3, 4, 5] },
-                  }}
-                  onMonthChange={handleMonthChange}
-                  selectedDays={selectedDate}
-                  onDayClick={handleDateChange}
-                  months={[
-                    'Janeiro',
-                    'Fevereiro',
-                    'Março',
-                    'Abril',
-                    'Maio',
-                    'Junho',
-                    'Julho',
-                    'Agosto',
-                    'Setembro',
-                    'Outubro',
-                    'Novembro',
-                    'Dezembro',
-                  ]}
-                />
-              </Calendar>
+              <Schedule>
+                <Title>Escolha o horário</Title>
+
+                <Section>
+                  <SectionTitle>Manhã</SectionTitle>
+
+                  <SectionContent>
+                    {morningAvailability.map(
+                      ({ hourFormatted, available, hour }) => (
+                        <Hour
+                          enabled={available}
+                          selected={selectedHour === hour}
+                          available={available}
+                          key={hourFormatted}
+                          onChange={() => handleSelectHour(hour)}
+                        >
+                          <HourText selected={selectedHour === hour}>
+                            {hourFormatted}
+                          </HourText>
+                        </Hour>
+                      ),
+                    )}
+                  </SectionContent>
+                </Section>
+                <Section>
+                  <SectionTitle>Tarde</SectionTitle>
+
+                  <SectionContent>
+                    {afternoonAvailability.map(
+                      ({ hourFormatted, available, hour }) => (
+                        <Hour
+                          enabled={available}
+                          selected={selectedHour === hour}
+                          available={available}
+                          key={hourFormatted}
+                          onChange={() => handleSelectHour(hour)}
+                        >
+                          <HourText selected={selectedHour === hour}>
+                            {hourFormatted}
+                          </HourText>
+                        </Hour>
+                      ),
+                    )}
+                  </SectionContent>
+                </Section>
+              </Schedule>
               <Button type="submit">Agendar</Button>
               <Link to="/dashboard">
                 <FiArrowLeft />
@@ -334,52 +360,34 @@ const CreateAppointment: React.FC = () => {
               </Link>
             </Form>
           </Provider>
-          <Schedule>
-            <Title>Escolha o horário</Title>
-
-            <Section>
-              <SectionTitle>Manhã</SectionTitle>
-
-              <SectionContent>
-                {morningAvailability.map(
-                  ({ hourFormatted, available, hour }) => (
-                    <Hour
-                      enabled={available}
-                      selected={selectedHour === hour}
-                      available={available}
-                      key={hourFormatted}
-                      onChange={() => handleSelectHour(hour)}
-                    >
-                      <HourText selected={selectedHour === hour}>
-                        {hourFormatted}
-                      </HourText>
-                    </Hour>
-                  ),
-                )}
-              </SectionContent>
-            </Section>
-            <Section>
-              <SectionTitle>Tarde</SectionTitle>
-
-              <SectionContent>
-                {afternoonAvailability.map(
-                  ({ hourFormatted, available, hour }) => (
-                    <Hour
-                      enabled={available}
-                      selected={selectedHour === hour}
-                      available={available}
-                      key={hourFormatted}
-                      onChange={() => handleSelectHour(hour)}
-                    >
-                      <HourText selected={selectedHour === hour}>
-                        {hourFormatted}
-                      </HourText>
-                    </Hour>
-                  ),
-                )}
-              </SectionContent>
-            </Section>
-          </Schedule>
+          <Calendar>
+            <Title>Escolha a data</Title>
+            <DayPicker
+              weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
+              fromMonth={new Date()}
+              disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
+              modifiers={{
+                available: { daysOfWeek: [1, 2, 3, 4, 5] },
+              }}
+              onMonthChange={handleMonthChange}
+              selectedDays={selectedDate}
+              onDayClick={handleDateChange}
+              months={[
+                'Janeiro',
+                'Fevereiro',
+                'Março',
+                'Abril',
+                'Maio',
+                'Junho',
+                'Julho',
+                'Agosto',
+                'Setembro',
+                'Outubro',
+                'Novembro',
+                'Dezembro',
+              ]}
+            />
+          </Calendar>
         </BodyContent>
       </Body>
     </Container>

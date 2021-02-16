@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 import signUpBackgroundImg from '../../assets/sign-in-background.png';
 
@@ -8,6 +8,10 @@ interface ProviderContainerProps {
 
 interface ProviderNameProps {
   selected: boolean;
+}
+
+interface SelectProps {
+  isFocused: boolean;
 }
 
 interface HourProps {
@@ -22,7 +26,11 @@ interface HourTextProps {
 
 export const Container = styled.div`
   /* width: 100%; */
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
+
 export const Header = styled.header`
   padding: 2.2rem;
   background: #28262e;
@@ -39,6 +47,9 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-left: 0 auto;
+  @media (min-width: 650px) {
+    width: 100%;
+  }
 
   > img {
     height: 100px;
@@ -106,10 +117,11 @@ export const Body = styled.div`
 `;
 
 export const BodyContent = styled.div`
-  max-width: 900px;
+  max-width: 1900px;
+  width: 1500;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   margin-left: 10rem;
   margin-right: 10px;
   form {
@@ -138,7 +150,7 @@ export const Provider = styled.div``;
 
 export const Content = styled.div``;
 
-export const Select = styled.div`
+export const Select = styled.div<SelectProps>`
   select {
     align-items: center;
     background: #232129;
@@ -149,16 +161,24 @@ export const Select = styled.div`
     width: 350px;
     margin-bottom: 10px;
     height: 56px;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 
     border: 2px solid #232129;
-    color: #666360;
+    color: whitesmoke;
 
-    display: flex;
+    /* & + div {
+      margin-top: 5.8rem;
+    } */
 
-    & + div {
-      margin-top: 0.8rem;
-    }
+    ${(props) =>
+      props.isFocused &&
+      css`
+        color: #dd9f3c;
+        border-color: #dd9f3c;
+      `}
+  }
+  select .option {
+    background-color: red;
   }
 `;
 
@@ -178,8 +198,12 @@ export const Calendar = styled.aside`
   max-width: 350px;
   width: 560px;
   height: 500px;
-  margin-top: 50px;
   text-align: left;
+  margin: 0 auto;
+  @media (max-width: 650px) {
+    margin-left: 0;
+    width: 100%;
+  }
 
   .DayPicker {
     background: #28262e;
@@ -227,7 +251,7 @@ export const Calendar = styled.aside`
   }
 
   .DayPicker-Day--selected {
-    background: #ff9000 !important;
+    background: #dd9f3c !important;
     border-radius: 10px;
     color: #232129 !important;
   }
@@ -235,7 +259,7 @@ export const Calendar = styled.aside`
 
 export const OpenDatePickerButton = styled.div`
   height: 46px;
-  background: #ff9000;
+  background: #dd9f3c;
   border-radius: 10px;
   align-items: center;
   justify-content: center;
@@ -248,7 +272,9 @@ export const OpenDatePickerButtonText = styled.div`
   color: #232129;
 `;
 
-export const Schedule = styled.div``;
+export const Schedule = styled.div`
+  text-align: left;
+`;
 export const Section = styled.div`
   margin-bottom: 24px;
 `;
@@ -267,7 +293,7 @@ export const SectionTitle = styled.div`
 export const SectionContent = styled.div``;
 export const Hour = styled.div<HourProps>`
   padding: 12px;
-  background: ${({ selected }) => (selected ? '#ff9000' : '#3e3b47')};
+  background: ${({ selected }) => (selected ? '#dd9f3c' : '#3e3b47')};
   border-radius: 10px;
   margin-right: 8px;
 

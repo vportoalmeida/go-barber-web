@@ -83,21 +83,23 @@ export const Profile = styled.div`
 export const Content = styled.main`
   max-width: 1500px;
   margin-top: 50px;
-  margin-left: 20px;
+  margin-left: 50px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-left: 0 auto;
 `;
 
 export const Schedule = styled.div`
   max-width: 600px;
   margin-top: 15px;
-  margin-left: 10px;
+  margin-left: 0 auto;
   position: relative;
   flex: 1;
   margin-right: 5rem;
   margin-bottom: 50px;
+  @media (max-width: 768px) {
+    margin-left: 100px;
+  }
   h1 {
     font-size: 3.6rem;
   }
@@ -270,6 +272,9 @@ export const Calendar = styled.aside`
   height: 500px;
   margin-top: 50px;
   margin-left: 0 auto;
+  @media (max-width: 650px) {
+    margin-left: 0;
+  }
 
   .DayPicker {
     background: #28262e;
@@ -317,7 +322,7 @@ export const Calendar = styled.aside`
   }
 
   .DayPicker-Day--selected {
-    background: #ff9000 !important;
+    background: #dd9f3c !important;
     border-radius: 10px;
     color: #232129 !important;
   }
