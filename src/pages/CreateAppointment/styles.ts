@@ -37,7 +37,6 @@ export const Header = styled.header`
   align-items: center;
   display: flex;
   margin-left: 0 auto;
-  min-width: 550px;
 `;
 
 export const HeaderContent = styled.div`
@@ -47,8 +46,13 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-left: 0 auto;
-  @media (min-width: 650px) {
+  @media (max-width: 650px) {
     width: 100%;
+    margin: 0 auto;
+    max-height: 50px;
+    > h1 {
+      display: none;
+    }
   }
 
   > img {
@@ -80,9 +84,7 @@ export const HeaderContent = styled.div`
 export const Profile = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 0 auto;
   justify-content: space-between;
-  min-width: 350px;
 
   img {
     width: 80px;
@@ -118,15 +120,14 @@ export const Body = styled.div`
 
 export const BodyContent = styled.div`
   max-width: 1900px;
-  width: 1500;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap-reverse;
-  margin-left: 10rem;
   margin-right: 10px;
+
   form {
     margin: 4rem 0;
-    width: 340px;
+
     text-align: center;
 
     h1 {
@@ -145,12 +146,35 @@ export const BodyContent = styled.div`
       }
     }
   }
+  @media (max-width: 600px) {
+    margin-bottom: 0px;
+    width: 100%;
+    justify-content: center;
+    margin-top: -60px;
+  }
+  @media (min-width: 600px) {
+    margin-bottom: 0px;
+    margin-left: 8%;
+    justify-content: space-around;
+    margin-top: 60px;
+  }
 `;
-export const Provider = styled.div``;
+
+export const Provider = styled.div`
+  @media (max-width: 768px) {
+    margin-top: -25%;
+    margin-bottom: 10px;
+  }
+  @media (min-width: 768px) {
+    margin-top: -150px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+`;
 
 export const Content = styled.div``;
 
-export const Select = styled.div<SelectProps>`
+export const Select = styled.div`
   select {
     align-items: center;
     background: #232129;
@@ -159,7 +183,7 @@ export const Select = styled.div<SelectProps>`
     border-radius: 10px;
     text-align: left;
     width: 350px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     height: 56px;
     font-size: 1.8rem;
 
@@ -169,13 +193,14 @@ export const Select = styled.div<SelectProps>`
     /* & + div {
       margin-top: 5.8rem;
     } */
+    @media (min-width: 768px) {
+      margin-top: 120px;
+      margin-bottom: 10px;
+    }
 
-    ${(props) =>
-      props.isFocused &&
-      css`
-        color: #dd9f3c;
-        border-color: #dd9f3c;
-      `}
+    @media (max-width: 600px) {
+      width: 100%;
+    }
   }
   select .option {
     background-color: red;
@@ -195,14 +220,14 @@ export const Background = styled.div`
 
 export const Calendar = styled.aside`
   padding: 0px;
-  max-width: 350px;
-  width: 560px;
+  max-width: 390px;
+  width: 400px;
   height: 500px;
   text-align: left;
   margin: 0 auto;
-  @media (max-width: 650px) {
-    margin-left: 0;
+  @media (max-width: 600px) {
     width: 100%;
+    margin: 5%;
   }
 
   .DayPicker {
@@ -274,6 +299,13 @@ export const OpenDatePickerButtonText = styled.div`
 
 export const Schedule = styled.div`
   text-align: left;
+  margin-top: 5%;
+  @media (max-width: 600px) {
+    margin-bottom: 10px;
+    margin-left: 0 auto;
+    justify-content: center;
+    width: 100%;
+  }
 `;
 export const Section = styled.div`
   margin-bottom: 24px;
