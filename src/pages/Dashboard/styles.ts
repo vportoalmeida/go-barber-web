@@ -86,15 +86,9 @@ export const Profile = styled.div`
 `;
 
 export const Content = styled.main`
-<<<<<<< HEAD
-  flex-wrap: wrap;
-  max-width: 1120px;
-  margin: 6.4rem auto;
-=======
   max-width: 1500px;
   margin-top: 50px;
   margin-left: 20px;
->>>>>>> b59015dd765de964289d20a69546ed3939cd28c8
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;

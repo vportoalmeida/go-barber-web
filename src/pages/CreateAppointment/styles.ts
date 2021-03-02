@@ -20,21 +20,30 @@ interface HourTextProps {
   selected: boolean;
 }
 
+export const Teste1 = styled.div``;
+
+export const Teste2 = styled.div``;
+
 export const Container = styled.div`
-  /* width: 100%; */
+  /* @media (max-width: 720px) {
+    flex-wrap: nowrap;
+    margin: auto;
+  } */
 `;
 export const Header = styled.header`
-  padding: 2.2rem;
-  background: #28262e;
+  /* padding: 2.2rem;
+  background: ${(props) => props.theme.colors.background};
   align-items: center;
   display: flex;
   margin-left: 0 auto;
-  min-width: 550px;
+  min-width: 350px; */
+  padding: 3.2rem 0;
+  background: #28262e;
 `;
 
 export const HeaderContent = styled.div`
-  max-width: 1900px;
-  width: 1400px;
+  /* max-width: 1900px;
+  width: 1500px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,10 +62,35 @@ export const HeaderContent = styled.div`
     border: 0;
 
     svg {
-      color: #999591;
+      color: ${(props) => props.theme.colors.primary};
       width: 20px;
       height: 20px;
       margin-left: 10px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: ${shade(0.2, '#999591')};
+      }
+    }
+  } */
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+
+  > img {
+    height: 80px;
+  }
+
+  button {
+    margin-left: auto;
+    background: transparent;
+    border: 0;
+
+    svg {
+      color: #999591;
+      width: 20px;
+      height: 20px;
       transition: color 0.2s;
 
       &:hover {
@@ -69,21 +103,18 @@ export const HeaderContent = styled.div`
 export const Profile = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 0 auto;
-  justify-content: space-between;
-  min-width: 350px;
+  margin-left: 8rem;
 
   img {
-    width: 80px;
-    height: 80px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    margin-left: 10px;
   }
 
   div {
     display: flex;
     flex-direction: column;
-    margin-left: 1.8rem;
+    margin-left: 1.6rem;
     line-height: 2.4rem;
 
     span {
@@ -92,7 +123,7 @@ export const Profile = styled.div`
 
     a {
       text-decoration: none;
-      color: #dd9f3c;
+      color: #ff9000;
 
       &:hover {
         opacity: 0.8;
@@ -106,9 +137,10 @@ export const Body = styled.div`
 `;
 
 export const BodyContent = styled.div`
-  max-width: 900px;
+  max-width: 1500px;
+  margin-top: 50px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   margin-left: 10rem;
   margin-right: 10px;
@@ -122,7 +154,7 @@ export const BodyContent = styled.div`
     }
 
     a {
-      color: #f4ede8;
+      color: ${(props) => props.theme.colors.tertiary};
       display: block;
       margin-top: 2.4rem;
       text-decoration: none;
@@ -136,12 +168,16 @@ export const BodyContent = styled.div`
 `;
 export const Provider = styled.div``;
 
-export const Content = styled.div``;
+export const Content = styled.main`
+  max-width: 1120px;
+  margin: 6.4rem auto;
+  display: flex;
+`;
 
 export const Select = styled.div`
   select {
     align-items: center;
-    background: #232129;
+    background: ${(props) => props.theme.colors.one};
     flex: 1;
     padding: 1.6rem;
     border-radius: 10px;
@@ -151,8 +187,8 @@ export const Select = styled.div`
     height: 56px;
     font-size: 1.6rem;
 
-    border: 2px solid #232129;
-    color: #666360;
+    border: 2px solid ${(props) => props.theme.colors.one};
+    color: ${(props) => props.theme.colors.two};
 
     display: flex;
 
@@ -174,12 +210,7 @@ export const Background = styled.div`
 `;
 
 export const Calendar = styled.aside`
-  padding: 0px;
-  max-width: 350px;
-  width: 560px;
-  height: 500px;
-  margin-top: 50px;
-  text-align: left;
+  width: 380px;
 
   .DayPicker {
     background: #28262e;
@@ -235,7 +266,7 @@ export const Calendar = styled.aside`
 
 export const OpenDatePickerButton = styled.div`
   height: 46px;
-  background: #ff9000;
+  background: ${(props) => props.theme.colors.info};
   border-radius: 10px;
   align-items: center;
   justify-content: center;
@@ -243,25 +274,65 @@ export const OpenDatePickerButton = styled.div`
 `;
 
 export const OpenDatePickerButtonText = styled.div`
-  font-family: 'RobotoSlab-Medium';
   font-size: 16px;
-  color: #232129;
+  color: ${(props) => props.theme.colors.one};
 `;
 
-export const Schedule = styled.div``;
-export const Section = styled.div`
-  margin-bottom: 24px;
+export const Schedule = styled.div`
+  flex: 1;
+  margin-right: 12rem;
+
+  h1 {
+    font-size: 3.6rem;
+  }
+
+  p {
+    margin-top: 0.8rem;
+    color: #ff9000;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+
+    span {
+      display: flex;
+      align-items: center;
+    }
+
+    span + span::before {
+      content: '';
+      width: 1px;
+      height: 12px;
+      background: #ff9000;
+      margin: 0 0.8rem;
+    }
+  }
+`;
+export const Section = styled.section`
+  /* margin-bottom: 24px; */
+  margin-top: 4.8rem;
+
+  > strong {
+    color: #999591;
+    font-size: 2rem;
+    line-height: 2.6rem;
+    border-bottom: 1px solid #3e3b47;
+    display: block;
+    padding-bottom: 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+
+  > p {
+    color: #999591;
+  }
 `;
 export const Title = styled.div`
-  font-family: 'RobotoSlab-Medium';
-  color: #f4ede8;
+  color: ${(props) => props.theme.colors.tertiary};
   font-size: 24px;
   margin: 0 24px 24px;
 `;
 export const SectionTitle = styled.div`
-  font-family: 'RobotoSlab-Regular';
   font-size: 18px;
-  color: #999591;
+  color: ${(props) => props.theme.colors.primary};
   margin: 0 24px 12px;
 `;
 export const SectionContent = styled.div``;
