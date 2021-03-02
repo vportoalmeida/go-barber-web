@@ -441,7 +441,6 @@ const CreateAppointment: React.FC = () => {
       {/* <Body>
         <BodyContent>
           <Provider>
-            <Title>Escolha o provider</Title>
             <Form
               ref={formRef}
               noValidate
@@ -464,35 +463,6 @@ const CreateAppointment: React.FC = () => {
                   ))}
                 </select>
               </Select>
-              <Calendar>
-                <Title>Escolha a data</Title>
-                <DayPicker
-                  weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-                  fromMonth={new Date()}
-                  disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
-                  modifiers={{
-                    available: { daysOfWeek: [1, 2, 3, 4, 5] },
-                  }}
-                  onMonthChange={handleMonthChange}
-                  selectedDays={selectedDate}
-                  onDayClick={handleDateChange}
-                  months={[
-                    'Janeiro',
-                    'Fevereiro',
-                    'Março',
-                    'Abril',
-                    'Maio',
-                    'Junho',
-                    'Julho',
-                    'Agosto',
-                    'Setembro',
-                    'Outubro',
-                    'Novembro',
-                    'Dezembro',
-                  ]}
-                />
-              </Calendar>
-
               <Schedule>
                 <Title>Escolha o horário</Title>
 
@@ -507,7 +477,7 @@ const CreateAppointment: React.FC = () => {
                           selected={selectedHour === hour}
                           available={available}
                           key={hourFormatted}
-                          onClick={() => handleSelectHour(hour)}
+                          onChange={() => handleSelectHour(hour)}
                         >
                           <HourText selected={selectedHour === hour}>
                             {hourFormatted}
@@ -528,7 +498,7 @@ const CreateAppointment: React.FC = () => {
                           selected={selectedHour === hour}
                           available={available}
                           key={hourFormatted}
-                          onClick={() => handleSelectHour(hour)}
+                          onChange={() => handleSelectHour(hour)}
                         >
                           <HourText selected={selectedHour === hour}>
                             {hourFormatted}
@@ -539,16 +509,40 @@ const CreateAppointment: React.FC = () => {
                   </SectionContent>
                 </Section>
               </Schedule>
-
-              <Button type="submit" onClick={handleCreateAppointment}>
-                Agendar
-              </Button>
+              <Button type="submit">Agendar</Button>
               <Link to="/dashboard">
                 <FiArrowLeft />
                 Voltar
               </Link>
             </Form>
           </Provider>
+          <Calendar>
+            <DayPicker
+              weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
+              fromMonth={new Date()}
+              disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
+              modifiers={{
+                available: { daysOfWeek: [1, 2, 3, 4, 5] },
+              }}
+              onMonthChange={handleMonthChange}
+              selectedDays={selectedDate}
+              onDayClick={handleDateChange}
+              months={[
+                'Janeiro',
+                'Fevereiro',
+                'Março',
+                'Abril',
+                'Maio',
+                'Junho',
+                'Julho',
+                'Agosto',
+                'Setembro',
+                'Outubro',
+                'Novembro',
+                'Dezembro',
+              ]}
+            />
+          </Calendar>
         </BodyContent>
       </Body> */}
     </Container>

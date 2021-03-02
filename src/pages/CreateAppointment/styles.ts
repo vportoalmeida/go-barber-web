@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 import signUpBackgroundImg from '../../assets/sign-in-background.png';
 
@@ -8,6 +8,10 @@ interface ProviderContainerProps {
 
 interface ProviderNameProps {
   selected: boolean;
+}
+
+interface SelectProps {
+  isFocused: boolean;
 }
 
 interface HourProps {
@@ -25,20 +29,18 @@ export const Teste1 = styled.div``;
 export const Teste2 = styled.div``;
 
 export const Container = styled.div`
-  /* @media (max-width: 720px) {
-    flex-wrap: nowrap;
-    margin: auto;
-  } */
+  /* width: 100%; */
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
+
 export const Header = styled.header`
-  /* padding: 2.2rem;
+  padding: 2.2rem;
   background: ${(props) => props.theme.colors.background};
   align-items: center;
   display: flex;
   margin-left: 0 auto;
-  min-width: 350px; */
-  padding: 3.2rem 0;
-  background: #28262e;
 `;
 
 export const HeaderContent = styled.div`
@@ -48,6 +50,14 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-left: 0 auto;
+  @media (max-width: 650px) {
+    width: 100%;
+    margin: 0 auto;
+    max-height: 50px;
+    > h1 {
+      display: none;
+    }
+  }
 
   > img {
     height: 100px;
@@ -103,7 +113,7 @@ export const HeaderContent = styled.div`
 export const Profile = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 8rem;
+  justify-content: space-between;
 
   img {
     width: 56px;
@@ -137,16 +147,15 @@ export const Body = styled.div`
 `;
 
 export const BodyContent = styled.div`
-  max-width: 1500px;
-  margin-top: 50px;
+  max-width: 1900px;
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-left: 10rem;
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
   margin-right: 10px;
+
   form {
     margin: 4rem 0;
-    width: 340px;
+
     text-align: center;
 
     h1 {
@@ -165,8 +174,31 @@ export const BodyContent = styled.div`
       }
     }
   }
+  @media (max-width: 600px) {
+    margin-bottom: 0px;
+    width: 100%;
+    justify-content: center;
+    margin-top: -60px;
+  }
+  @media (min-width: 600px) {
+    margin-bottom: 0px;
+    margin-left: 8%;
+    justify-content: space-around;
+    margin-top: 60px;
+  }
 `;
-export const Provider = styled.div``;
+
+export const Provider = styled.div`
+  @media (max-width: 768px) {
+    margin-top: -25%;
+    margin-bottom: 10px;
+  }
+  @media (min-width: 768px) {
+    margin-top: -150px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+`;
 
 export const Content = styled.main`
   max-width: 1120px;
@@ -183,18 +215,27 @@ export const Select = styled.div`
     border-radius: 10px;
     text-align: left;
     width: 350px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     height: 56px;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 
-    border: 2px solid ${(props) => props.theme.colors.one};
-    color: ${(props) => props.theme.colors.two};
+    border: 2px solid #232129;
+    color: whitesmoke;
 
-    display: flex;
-
-    & + div {
-      margin-top: 0.8rem;
+    /* & + div {
+      margin-top: 5.8rem;
+    } */
+    @media (min-width: 768px) {
+      margin-top: 120px;
+      margin-bottom: 10px;
     }
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+  select .option {
+    background-color: red;
   }
 `;
 
@@ -210,7 +251,16 @@ export const Background = styled.div`
 `;
 
 export const Calendar = styled.aside`
-  width: 380px;
+  padding: 0px;
+  max-width: 390px;
+  width: 400px;
+  height: 500px;
+  text-align: left;
+  margin: 0 auto;
+  @media (max-width: 600px) {
+    width: 100%;
+    margin: 5%;
+  }
 
   .DayPicker {
     background: #28262e;
@@ -258,7 +308,7 @@ export const Calendar = styled.aside`
   }
 
   .DayPicker-Day--selected {
-    background: #ff9000 !important;
+    background: #dd9f3c !important;
     border-radius: 10px;
     color: #232129 !important;
   }
@@ -266,7 +316,7 @@ export const Calendar = styled.aside`
 
 export const OpenDatePickerButton = styled.div`
   height: 46px;
-  background: ${(props) => props.theme.colors.info};
+  background: #dd9f3c;
   border-radius: 10px;
   align-items: center;
   justify-content: center;
@@ -320,11 +370,8 @@ export const Section = styled.section`
     padding-bottom: 1.6rem;
     margin-bottom: 1.6rem;
   }
-
-  > p {
-    color: #999591;
-  }
 `;
+
 export const Title = styled.div`
   color: ${(props) => props.theme.colors.tertiary};
   font-size: 24px;
@@ -338,7 +385,7 @@ export const SectionTitle = styled.div`
 export const SectionContent = styled.div``;
 export const Hour = styled.div<HourProps>`
   padding: 12px;
-  background: ${({ selected }) => (selected ? '#ff9000' : '#3e3b47')};
+  background: ${({ selected }) => (selected ? '#dd9f3c' : '#3e3b47')};
   border-radius: 10px;
   margin-right: 8px;
 

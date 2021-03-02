@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
-  @media (max-width: 720px) {
-    flex-wrap: nowrap;
-    margin: auto;
+  @media (max-width: 650px) {
+    flex-direction: column;
   }
 `;
 
@@ -13,17 +12,23 @@ export const Header = styled.header`
   background: #28262e;
   align-items: center;
   display: flex;
-  margin-left: 0 auto;
-  min-width: 350px;
 `;
 
 export const HeaderContent = styled.div`
   max-width: 1900px;
-  width: 1500px;
+  width: 1400px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-left: 0 auto;
+  @media (max-width: 650px) {
+    width: 100%;
+    margin: 0 auto;
+    max-height: 50px;
+    > h1 {
+      display: none;
+    }
+  }
   > img {
     height: 100px;
   }
@@ -53,9 +58,7 @@ export const HeaderContent = styled.div`
 export const Profile = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 0 auto;
   justify-content: space-between;
-  min-width: 350px;
 
   img {
     width: 80px;
@@ -85,24 +88,45 @@ export const Profile = styled.div`
   }
 `;
 
-export const Content = styled.main`
-  max-width: 1500px;
-  margin-top: 50px;
-  margin-left: 20px;
+export const Body = styled.div`
+  margin-top: 8rem;
+`;
+
+export const BodyContent = styled.div`
+  max-width: 1900px;
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-left: 0 auto;
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+  margin-right: 10px;
+
+  @media (max-width: 600px) {
+    margin-bottom: 0px;
+    width: 100%;
+    justify-content: center;
+    margin-top: -60px;
+  }
+  @media (min-width: 500px) {
+    margin-bottom: 0px;
+    margin-left: 8%;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 60px;
+  }
 `;
 
 export const Schedule = styled.div`
   max-width: 600px;
-  margin-top: 15px;
-  margin-left: 10px;
+  margin-left: 0 auto;
   position: relative;
   flex: 1;
-  margin-right: 5rem;
-  margin-bottom: 50px;
+
+  @media (max-width: 600px) {
+    margin-bottom: 10px;
+    justify-content: center;
+    width: 100%;
+    margin: 5%;
+  }
+
   h1 {
     font-size: 3.6rem;
   }
@@ -133,6 +157,9 @@ export const NextAppointment = styled.div`
   margin-top: 6.4rem;
   width: 500px;
   margin-left: 0 auto;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 
   > strong {
     color: #999591;
@@ -186,6 +213,9 @@ export const NextAppointment = styled.div`
 
 export const ButtonApointment = styled.section`
   width: 34rem;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 export const Section = styled.section`
@@ -206,26 +236,8 @@ export const Section = styled.section`
     color: #999591;
   }
 `;
-export const BtnAgendar = styled.section`
-  background: #dd9f3c;
-  height: 56px;
-  width: 120px;
-  border-radius: 10px;
-  border: 0;
-  padding: 0 1.6rem;
-  color: #312e38;
-  font-weight: 500;
-  margin-top: 1.6rem;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background: ${shade(0.2, '#dd9f3c')};
-  }
-`;
 
 export const Appointment = styled.div`
-  display: block;
-  align-items: center;
   margin-left: 0 auto;
 
   & + div {
@@ -270,11 +282,19 @@ export const Appointment = styled.div`
 
 export const Calendar = styled.aside`
   padding: 0px;
-  max-width: 350px;
-  width: 560px;
+  max-width: 390px;
+  width: 400px;
   height: 500px;
-  margin-top: 50px;
+  text-align: left;
   margin-left: 0 auto;
+  @media (max-width: 600px) {
+    width: 100%;
+    margin: 5%;
+    margin-bottom: -150px;
+  }
+  @media (min-width: 500px) {
+    margin-right: 20%;
+  }
 
   .DayPicker {
     background: #28262e;
@@ -322,7 +342,7 @@ export const Calendar = styled.aside`
   }
 
   .DayPicker-Day--selected {
-    background: #ff9000 !important;
+    background: #dd9f3c !important;
     border-radius: 10px;
     color: #232129 !important;
   }
