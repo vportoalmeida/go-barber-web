@@ -39,6 +39,7 @@ import {
   Content,
   Teste1,
   Teste2,
+  BtnContent,
 } from './styles';
 import userDefaultAvatar from '../../assets/user-circle1.png';
 import Button from '../../components/Button';
@@ -331,11 +332,12 @@ const CreateAppointment: React.FC = () => {
           <Content>
             <Teste1>
               <Schedule>
-                <h1>Escolha o Cabeleireiro</h1>
-                {isToday(selectedDate) && <span>Hoje</span>}
-                <span>{selectedDateAsText}</span>
-                <span>{selectedWeekDay}</span>
-
+                <h1>Escolha o Profissional</h1>
+                <p>
+                  {isToday(selectedDate) && <span>Hoje</span>}
+                  <span>{selectedDateAsText}</span>
+                  <span>{selectedWeekDay}</span>
+                </p>
                 <Section>
                   <Select>
                     <select
@@ -428,9 +430,11 @@ const CreateAppointment: React.FC = () => {
               </Calendar>
             </Teste2>
           </Content>
-          <Button type="submit" onClick={handleCreateAppointment}>
-            Agendar
-          </Button>
+          <BtnContent>
+            <Button type="submit" onClick={handleCreateAppointment}>
+              Agendar
+            </Button>
+          </BtnContent>
           <Link to="/dashboard">
             <FiArrowLeft />
             Voltar

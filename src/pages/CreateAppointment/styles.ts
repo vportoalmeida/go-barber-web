@@ -24,9 +24,24 @@ interface HourTextProps {
   selected: boolean;
 }
 
-export const Teste1 = styled.div``;
+export const Teste1 = styled.div`
+  margin-top: 150px;
 
-export const Teste2 = styled.div``;
+  @media (max-width: 768px) {
+    margin-left: 5%;
+    justify-content: center;
+    margin-top: -15%;
+  }
+  @media (min-width: 800px) {
+    margin-left: 5%;
+    justify-content: space-around;
+    margin-right: 30%;
+  }
+`;
+
+export const Teste2 = styled.div`
+  margin-top: 150px;
+`;
 
 export const Container = styled.div`
   /* width: 100%; */
@@ -41,10 +56,14 @@ export const Header = styled.header`
   align-items: center;
   display: flex;
   margin-left: 0 auto;
+  @media (max-width: 650px) {
+    width: 400px;
+    margin: 0 auto;
+  }
 `;
 
 export const HeaderContent = styled.div`
-  /* max-width: 1900px;
+  max-width: 1900px;
   width: 1500px;
   display: flex;
   justify-content: space-between;
@@ -64,6 +83,7 @@ export const HeaderContent = styled.div`
   }
 
   > h1 {
+    margin-right: 20px;
     margin-left: 20px;
   }
 
@@ -82,7 +102,7 @@ export const HeaderContent = styled.div`
         color: ${shade(0.2, '#999591')};
       }
     }
-  } */
+  }
   max-width: 1120px;
   margin: 0 auto;
   display: flex;
@@ -133,7 +153,7 @@ export const Profile = styled.div`
 
     a {
       text-decoration: none;
-      color: #ff9000;
+      color: #dd9f3c;
 
       &:hover {
         opacity: 0.8;
@@ -150,7 +170,6 @@ export const BodyContent = styled.div`
   max-width: 1900px;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap-reverse;
   margin-right: 10px;
 
   form {
@@ -177,14 +196,9 @@ export const BodyContent = styled.div`
   @media (max-width: 600px) {
     margin-bottom: 0px;
     width: 100%;
-    justify-content: center;
-    margin-top: -60px;
   }
   @media (min-width: 600px) {
     margin-bottom: 0px;
-    margin-left: 8%;
-    justify-content: space-around;
-    margin-top: 60px;
   }
 `;
 
@@ -204,6 +218,10 @@ export const Content = styled.main`
   max-width: 1120px;
   margin: 6.4rem auto;
   display: flex;
+  @media (max-width: 768px) {
+    flex-wrap: wrap-reverse;
+    width: 100%;
+  }
 `;
 
 export const Select = styled.div`
@@ -222,16 +240,11 @@ export const Select = styled.div`
     border: 2px solid #232129;
     color: whitesmoke;
 
-    /* & + div {
+    & + div {
       margin-top: 5.8rem;
-    } */
-    @media (min-width: 768px) {
-      margin-top: 120px;
-      margin-bottom: 10px;
     }
-
-    @media (max-width: 600px) {
-      width: 100%;
+    @media (min-width: 768px) {
+      margin-bottom: 10px;
     }
   }
   select .option {
@@ -250,6 +263,15 @@ export const Background = styled.div`
   background-size: cover;
 `;
 
+export const BtnContent = styled.div`
+  width: 400px;
+  margin: 0 auto;
+  @media (max-width: 600px) {
+    width: 100%;
+    margin: 2%;
+  }
+`;
+
 export const Calendar = styled.aside`
   padding: 0px;
   max-width: 390px;
@@ -259,7 +281,8 @@ export const Calendar = styled.aside`
   margin: 0 auto;
   @media (max-width: 600px) {
     width: 100%;
-    margin: 5%;
+    margin: 3%;
+    margin-top: -15%;
   }
 
   .DayPicker {
@@ -330,15 +353,14 @@ export const OpenDatePickerButtonText = styled.div`
 
 export const Schedule = styled.div`
   flex: 1;
-  margin-right: 12rem;
 
   h1 {
-    font-size: 3.6rem;
+    font-size: 2.9rem;
   }
 
   p {
     margin-top: 0.8rem;
-    color: #ff9000;
+    color: #dd9f3c;
     display: flex;
     align-items: center;
     font-weight: 500;
@@ -352,8 +374,8 @@ export const Schedule = styled.div`
       content: '';
       width: 1px;
       height: 12px;
-      background: #ff9000;
-      margin: 0 0.8rem;
+      background: #dd9f3c;
+      margin: 0 0.9rem;
     }
   }
 `;
@@ -382,17 +404,24 @@ export const SectionTitle = styled.div`
   color: ${(props) => props.theme.colors.primary};
   margin: 0 24px 12px;
 `;
-export const SectionContent = styled.div``;
+export const SectionContent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 3%;
+`;
 export const Hour = styled.div<HourProps>`
+  display: flex;
+  width: 100px;
   padding: 12px;
   background: ${({ selected }) => (selected ? '#dd9f3c' : '#3e3b47')};
   border-radius: 10px;
+  margin-top: 10px;
   margin-right: 8px;
-
-  opacity: ${({ available }) => (available ? 1 : 0.3)};
+  opacity: ${({ available }) => (available ? 1 : 0.9)};
 `;
 export const HourText = styled.div<HourTextProps>`
   font-family: 'RobotoSlab-Regular';
+  text-align: center;
   font-size: 16px;
   color: ${({ selected }) => (selected ? '#232129' : '#f4ede8')};
 `;
