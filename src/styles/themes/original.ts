@@ -17,7 +17,7 @@ export default {
     gray: '#f4ede8',
 
     success: '#4E41F0',
-    info: '#ff9000',
+    info: '#dd9f3c',
     warning: '#E44C4E',
     go: '#3A0',
   },

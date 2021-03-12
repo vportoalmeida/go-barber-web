@@ -80,6 +80,42 @@ export const AnimationContainer = styled.div`
     }
   }
 `;
+export const CreateAccount = styled.div`
+  display: flex;
+  animation: ${appearFromLeft} 1s;
+
+  > a {
+    color: #dd9f3c;
+    display: block;
+    margin-top: 1.4rem;
+    text-decoration: none;
+    transition: color 0.2s;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: ${shade(0.2, '#dd9f3c')};
+    }
+  }
+`;
+
+export const ForgotPassword = styled.div`
+  a {
+    color: whitesmoke;
+    display: block;
+    margin-top: 1.4rem;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: ${shade(0.2, '#dd9f3c')};
+    }
+  }
+`;
 
 export const Background = styled.div`
   flex: 1;

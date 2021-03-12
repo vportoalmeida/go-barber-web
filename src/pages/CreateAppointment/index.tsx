@@ -37,8 +37,8 @@ import {
   Body,
   BodyContent,
   Content,
-  Teste1,
-  Teste2,
+  Session1,
+  Session2,
   BtnContent,
 } from './styles';
 import userDefaultAvatar from '../../assets/user-circle1.png';
@@ -281,7 +281,6 @@ const CreateAppointment: React.FC = () => {
           { locale: ptBr },
         ),
       });
-
     } catch (err) {
       addToast({
         type: 'error',
@@ -333,7 +332,7 @@ const CreateAppointment: React.FC = () => {
           onSubmit={handleSubmit}
         >
           <Content>
-            <Teste1>
+            <Session1>
               <Schedule>
                 <h1>Escolha o Profissional</h1>
                 <p>
@@ -401,8 +400,8 @@ const CreateAppointment: React.FC = () => {
                   </SectionContent>
                 </Section>
               </Schedule>
-            </Teste1>
-            <Teste2>
+            </Session1>
+            <Session2>
               <Calendar>
                 <Title>Escolha a data</Title>
                 <DayPicker
@@ -431,7 +430,7 @@ const CreateAppointment: React.FC = () => {
                   ]}
                 />
               </Calendar>
-            </Teste2>
+            </Session2>
           </Content>
           <BtnContent>
             <Button type="submit" onClick={handleCreateAppointment}>
