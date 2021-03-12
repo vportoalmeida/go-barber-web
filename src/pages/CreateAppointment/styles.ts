@@ -24,7 +24,7 @@ interface HourTextProps {
   selected: boolean;
 }
 
-export const Teste1 = styled.div`
+export const Session1 = styled.div`
   margin-top: 150px;
 
   @media (max-width: 768px) {
@@ -39,7 +39,7 @@ export const Teste1 = styled.div`
   }
 `;
 
-export const Teste2 = styled.div`
+export const Session2 = styled.div`
   margin-top: 150px;
 `;
 

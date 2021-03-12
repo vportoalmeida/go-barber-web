@@ -15,7 +15,14 @@ import logoImg from '../../assets/logo_sistema.svg';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content, AnimationContainer, Background } from './styles';
+import {
+  Container,
+  Content,
+  AnimationContainer,
+  Background,
+  CreateAccount,
+  ForgotPassword,
+} from './styles';
 
 interface SignInFormData {
   email: string;
@@ -93,14 +100,16 @@ const SignIn: React.FC = () => {
             />
 
             <Button type="submit">Entrar</Button>
-
-            <Link to="/forgot-password">Esqueci minha senha</Link>
           </Form>
-
-          <Link to="/signup">
-            <FiLogIn />
-            Criar conta
-          </Link>
+          <CreateAccount>
+            <Link to="/signup">
+              <FiLogIn />
+              Criar conta
+            </Link>
+            <ForgotPassword>
+              <Link to="/forgot-password">Esqueci minha senha</Link>
+            </ForgotPassword>
+          </CreateAccount>
         </AnimationContainer>
       </Content>
       <Background />
