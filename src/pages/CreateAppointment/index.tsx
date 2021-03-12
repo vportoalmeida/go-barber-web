@@ -39,6 +39,7 @@ import {
   Content,
   Teste1,
   Teste2,
+  BtnContent,
 } from './styles';
 import userDefaultAvatar from '../../assets/user-circle1.png';
 import Button from '../../components/Button';
@@ -265,19 +266,22 @@ const CreateAppointment: React.FC = () => {
       const date = new Date(selectedDate);
       date.setHours(selectedHour);
       date.setMinutes(0);
-      console.log('Data: ', date);
-      console.log(selectedProvider);
+
       const retorno = await api.post('appointments', {
         provider_id: selectedProvider,
         date,
       });
-      console.log(retorno);
+
       addToast({
         type: 'success',
-        title: 'Cadastro realizado!',
-        description: `date: ${date.getTime()}`,
+        title: 'Agendamento realizado!',
+        description: format(
+          date,
+          "EEEE', dia' dd 'de' MMMM 'de' yyyy 'às' HH:mm'h'",
+          { locale: ptBr },
+        ),
       });
-      // navigate('AppointmentCreated', { date: date.getTime() });
+
     } catch (err) {
       addToast({
         type: 'error',
@@ -331,11 +335,12 @@ const CreateAppointment: React.FC = () => {
           <Content>
             <Teste1>
               <Schedule>
-                <h1>Escolha o Cabeleireiro</h1>
-                {isToday(selectedDate) && <span>Hoje</span>}
-                <span>{selectedDateAsText}</span>
-                <span>{selectedWeekDay}</span>
-
+                <h1>Escolha o Profissional</h1>
+                <p>
+                  {isToday(selectedDate) && <span>Hoje</span>}
+                  <span>{selectedDateAsText}</span>
+                  <span>{selectedWeekDay}</span>
+                </p>
                 <Section>
                   <Select>
                     <select
@@ -428,123 +433,17 @@ const CreateAppointment: React.FC = () => {
               </Calendar>
             </Teste2>
           </Content>
-          <Button type="submit" onClick={handleCreateAppointment}>
-            Agendar
-          </Button>
+          <BtnContent>
+            <Button type="submit" onClick={handleCreateAppointment}>
+              Agendar
+            </Button>
+          </BtnContent>
           <Link to="/dashboard">
             <FiArrowLeft />
             Voltar
           </Link>
         </Form>
       </Provider>
-
-      {/* <Body>
-        <BodyContent>
-          <Provider>
-            <Form
-              ref={formRef}
-              noValidate
-              autoComplete="off"
-              onSubmit={handleSubmit}
-            >
-              <Select>
-                <select
-                  placeholder="Profissional"
-                  value={selectedProvider}
-                  onChange={handleSelectProvider}
-                >
-                  <option value="" key="">
-                    Selecione o Prestador de servico
-                  </option>
-                  {providers.map((provider) => (
-                    <option value={provider.id} key={provider.id}>
-                      {provider.name}
-                    </option>
-                  ))}
-                </select>
-              </Select>
-              <Schedule>
-                <Title>Escolha o horário</Title>
-
-                <Section>
-                  <SectionTitle>Manhã</SectionTitle>
-
-                  <SectionContent>
-                    {morningAvailability.map(
-                      ({ hourFormatted, available, hour }) => (
-                        <Hour
-                          enabled={available}
-                          selected={selectedHour === hour}
-                          available={available}
-                          key={hourFormatted}
-                          onChange={() => handleSelectHour(hour)}
-                        >
-                          <HourText selected={selectedHour === hour}>
-                            {hourFormatted}
-                          </HourText>
-                        </Hour>
-                      ),
-                    )}
-                  </SectionContent>
-                </Section>
-                <Section>
-                  <SectionTitle>Tarde</SectionTitle>
-
-                  <SectionContent>
-                    {afternoonAvailability.map(
-                      ({ hourFormatted, available, hour }) => (
-                        <Hour
-                          enabled={available}
-                          selected={selectedHour === hour}
-                          available={available}
-                          key={hourFormatted}
-                          onChange={() => handleSelectHour(hour)}
-                        >
-                          <HourText selected={selectedHour === hour}>
-                            {hourFormatted}
-                          </HourText>
-                        </Hour>
-                      ),
-                    )}
-                  </SectionContent>
-                </Section>
-              </Schedule>
-              <Button type="submit">Agendar</Button>
-              <Link to="/dashboard">
-                <FiArrowLeft />
-                Voltar
-              </Link>
-            </Form>
-          </Provider>
-          <Calendar>
-            <DayPicker
-              weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-              fromMonth={new Date()}
-              disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
-              modifiers={{
-                available: { daysOfWeek: [1, 2, 3, 4, 5] },
-              }}
-              onMonthChange={handleMonthChange}
-              selectedDays={selectedDate}
-              onDayClick={handleDateChange}
-              months={[
-                'Janeiro',
-                'Fevereiro',
-                'Março',
-                'Abril',
-                'Maio',
-                'Junho',
-                'Julho',
-                'Agosto',
-                'Setembro',
-                'Outubro',
-                'Novembro',
-                'Dezembro',
-              ]}
-            />
-          </Calendar>
-        </BodyContent>
-      </Body> */}
     </Container>
   );
 };
