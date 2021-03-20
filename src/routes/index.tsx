@@ -11,6 +11,7 @@ import CreateAppointment from '../pages/CreateAppointment';
 
 import Dashboard from '../pages/Dashboard';
 import Profile from '../pages/Profile';
+import Customer from '../pages/Customer';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -20,6 +21,7 @@ const Routes: React.FC = () => (
     <Route path="/reset-password" component={ResetPassword} />
 
     <Route path="/dashboard" component={Dashboard} isPrivate />
+    <Route path="/customer" component={Customer} isPrivate />
     <Route path="/profile" component={Profile} isPrivate />
     <Route path="/appointment" component={CreateAppointment} isPrivate />
   </Switch>

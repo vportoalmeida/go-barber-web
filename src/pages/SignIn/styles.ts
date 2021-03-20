@@ -107,7 +107,6 @@ export const ForgotPassword = styled.div`
     margin-top: 1.4rem;
     text-decoration: none;
     transition: color 0.2s;
-
     display: flex;
     align-items: center;
 
