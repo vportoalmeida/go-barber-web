@@ -53,7 +53,7 @@ const SignIn: React.FC = () => {
         });
 
         await signIn({ email: data.email, password: data.password });
-        history.push('/dashboard');
+        history.push('/appointment');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
@@ -83,7 +83,7 @@ const SignIn: React.FC = () => {
             autoComplete="off"
             onSubmit={handleSubmit}
           >
-            <h1>Faça seu logon</h1>
+            <h1>Faça seu login</h1>
 
             <Input
               name="email"

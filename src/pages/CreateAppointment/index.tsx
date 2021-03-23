@@ -34,8 +34,6 @@ import {
   Hour,
   HourText,
   Profile,
-  Body,
-  BodyContent,
   Content,
   Session1,
   Session2,
@@ -165,7 +163,6 @@ const CreateAppointment: React.FC = () => {
       })
       .then((response) => {
         setMonthAvailability(response.data);
-        console.log(response.data);
       });
   }, [currentMonth, user.id]);
 
@@ -437,10 +434,6 @@ const CreateAppointment: React.FC = () => {
               Agendar
             </Button>
           </BtnContent>
-          <Link to="/dashboard">
-            <FiArrowLeft />
-            Voltar
-          </Link>
         </Form>
       </Provider>
     </Container>

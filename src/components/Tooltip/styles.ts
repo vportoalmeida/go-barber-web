@@ -24,7 +24,7 @@ export const Container = styled.div`
     &::before {
       content: '';
       border-style: solid;
-      border-color: #ff9000 transparent;
+      border-color: #dd9f3c transparent;
       border-width: 6px 6px 0 6px;
       top: 100%;
       position: absolute;

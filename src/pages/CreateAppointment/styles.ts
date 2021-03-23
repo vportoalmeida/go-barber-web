@@ -162,46 +162,6 @@ export const Profile = styled.div`
   }
 `;
 
-export const Body = styled.div`
-  margin-top: 8rem;
-`;
-
-export const BodyContent = styled.div`
-  max-width: 1900px;
-  display: flex;
-  justify-content: space-between;
-  margin-right: 10px;
-
-  form {
-    margin: 4rem 0;
-
-    text-align: center;
-
-    h1 {
-      margin-bottom: 2.4rem;
-    }
-
-    a {
-      color: ${(props) => props.theme.colors.tertiary};
-      display: block;
-      margin-top: 2.4rem;
-      text-decoration: none;
-      transition: color 0.2s;
-
-      &:hover {
-        color: ${shade(0.2, '#f4ede8')};
-      }
-    }
-  }
-  @media (max-width: 600px) {
-    margin-bottom: 0px;
-    width: 100%;
-  }
-  @media (min-width: 600px) {
-    margin-bottom: 0px;
-  }
-`;
-
 export const Provider = styled.div`
   @media (max-width: 768px) {
     margin-top: -25%;
