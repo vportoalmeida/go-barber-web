@@ -53,7 +53,10 @@ const AuthProvider: React.FC = ({ children }) => {
     api.defaults.headers.authorization = `Bearer ${token}`;
 
     setData({ token, user });
+<<<<<<< HEAD
     console.log(user.user_type);
+=======
+>>>>>>> bece4c67067c0024c1b157c857f0175684de3f50
     return user.user_type;
   }, []);
 

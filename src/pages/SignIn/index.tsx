@@ -52,11 +52,12 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        const res = await signIn({
+        const result = await signIn({
           email: data.email,
           password: data.password,
         });
-        if (res === 'C') {
+
+        if (result === 'C') {
           history.push('/appointment');
         } else {
           history.push('/dashboard');
