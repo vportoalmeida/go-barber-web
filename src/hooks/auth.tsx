@@ -7,6 +7,7 @@ interface User {
   name: string;
   email: string;
   avatar_url: string;
+  user_type: string;
 }
 
 interface AuthState {
@@ -21,7 +22,7 @@ interface SignInCredentials {
 
 interface AuthContextData {
   user: User;
-  signIn(credentials: SignInCredentials): Promise<void>;
+  signIn(credentials: SignInCredentials): Promise<string>;
   signOut(): void;
   updateUser: (user: User) => void;
 }
@@ -41,7 +42,7 @@ const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState;
   });
 
-  const signIn = useCallback(async ({ email, password }) => {
+  const signIn = useCallback(async ({ email, password }): Promise<string> => {
     const response = await api.post('sessions', { email, password });
 
     const { token, user } = response.data;
@@ -52,6 +53,8 @@ const AuthProvider: React.FC = ({ children }) => {
     api.defaults.headers.authorization = `Bearer ${token}`;
 
     setData({ token, user });
+    console.log(user.user_type);
+    return user.user_type;
   }, []);
 
   const signOut = useCallback(() => {
