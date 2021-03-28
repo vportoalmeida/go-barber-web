@@ -111,7 +111,7 @@ const CreateAppointment: React.FC = () => {
     api.get<Provider[]>('users').then(({ data }) => {
       const array: Provider[] = [];
       const providersArray = data.map((item) => {
-        if (item.user_type === 'P' || item.user_type === 'A') {
+        if (item.user_type === 'P') {
           array.push(item);
         }
         return array;
