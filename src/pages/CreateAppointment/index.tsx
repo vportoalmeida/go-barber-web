@@ -57,6 +57,7 @@ export interface Provider {
   id: string;
   name: string;
   avatar_url: string;
+  user_type: string;
 }
 
 interface Appointment {
@@ -102,13 +103,21 @@ const CreateAppointment: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-  const { signOut, user } = useAuth();
+  const { signOut, user, token } = useAuth();
   const [providers, setProviders] = useState<Provider[]>([]);
   const [selectedProvider, setSelectedProvider] = useState(params.providerId);
 
   useEffect(() => {
-    api.get<Provider[]>('providers').then(({ data }) => {
-      setProviders(data);
+    api.get<Provider[]>('users').then(({ data }) => {
+      const array: Provider[] = [];
+      const providersArray = data.map((item) => {
+        if (item.user_type === 'P' || item.user_type === 'A') {
+          array.push(item);
+        }
+        return array;
+      });
+      Promise.all(providersArray);
+      setProviders(array);
     });
   }, []);
 
