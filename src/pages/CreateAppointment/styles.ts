@@ -377,7 +377,7 @@ export const Hour = styled.div<HourProps>`
   border-radius: 10px;
   margin-top: 10px;
   margin-right: 8px;
-  opacity: ${({ available }) => (available ? 1 : 0.9)};
+  opacity: ${({ available }) => (available ? 1 : 0.1)};
 `;
 export const HourText = styled.div<HourTextProps>`
   font-family: 'RobotoSlab-Regular';
