@@ -40,6 +40,7 @@ import {
   Session1,
   Session2,
   BtnContent,
+  ButtonApointment,
 } from './styles';
 import userDefaultAvatar from '../../assets/user-circle1.png';
 import Button from '../../components/Button';
@@ -183,6 +184,10 @@ const CreateAppointment: React.FC = () => {
     }
   }, []);
 
+  const handleNav = useCallback(() => {
+    history.push('/customer');
+  }, [history]);
+
   const handleMonthChange = useCallback((month: Date) => {
     setCurrentMonth(month);
   }, []);
@@ -280,6 +285,8 @@ const CreateAppointment: React.FC = () => {
         date,
       });
 
+      history.push('/customer');
+
       addToast({
         type: 'success',
         title: 'Agendamento realizado!',
@@ -297,7 +304,7 @@ const CreateAppointment: React.FC = () => {
           'Ocorreu um erro ao tentar criar um agendamento, tente novamente',
       });
     }
-  }, [addToast, selectedDate, selectedHour, selectedProvider]);
+  }, [addToast, history, selectedDate, selectedHour, selectedProvider]);
 
   const selectedDateAsText = useMemo(() => {
     return format(selectedDate, "'Dia' dd 'de' MMMM", { locale: ptBr });
@@ -341,6 +348,11 @@ const CreateAppointment: React.FC = () => {
         >
           <Content>
             <Session1>
+              <ButtonApointment>
+                <Button type="button" onClick={handleNav}>
+                  Meus Agendamentos
+                </Button>
+              </ButtonApointment>
               <Schedule>
                 <h1>Escolha o Profissional</h1>
                 <p>

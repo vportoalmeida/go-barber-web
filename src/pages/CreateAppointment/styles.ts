@@ -184,6 +184,14 @@ export const Content = styled.main`
   }
 `;
 
+export const ButtonApointment = styled.section`
+  width: 34rem;
+  margin-bottom: 30px;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+`;
+
 export const Select = styled.div`
   select {
     align-items: center;

@@ -54,6 +54,36 @@ interface AvailabilityItem {
   available: boolean;
 }
 
+interface UserAppointmentReturnDTO {
+  id: string;
+  date: string;
+  hourFormatted: string;
+  dataFormatted: string;
+  active: boolean;
+  created_at: Date;
+  updated_at: Date;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    avatar: string;
+    user_type: string;
+    created_at: Date;
+    updated_at: Date;
+    avatar_url: string | null;
+  };
+  provider: {
+    id: string;
+    name: string;
+    email: string;
+    avatar: string;
+    user_type: string;
+    created_at: Date;
+    updated_at: Date;
+    avatar_url: string | null;
+  };
+}
+
 const Dashboard: React.FC = () => {
   const [availability, setAvailability] = useState<AvailabilityItem[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -62,46 +92,36 @@ const Dashboard: React.FC = () => {
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
   >([]);
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
+
+  const [appointments, setAppointments] = useState<UserAppointmentReturnDTO[]>(
+    [],
+  );
 
   const { signOut, user } = useAuth();
 
   const history = useHistory();
 
-  const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
-    if (modifiers.available && !modifiers.disabled) {
-      setSelectedDate(day);
-    }
-  }, []);
-
-  const handleMonthChange = useCallback((month: Date) => {
-    setCurrentMonth(month);
-  }, []);
-
   const handleNav = useCallback(() => {
     history.push('/appointment');
   }, [history]);
 
-  const handleSelectHour = useCallback((hour: number) => {
-    setSelectedHour(hour);
-  }, []);
+  const handleRemoveAppointment = useCallback(
+    async (id: string, date: string) => {
+      try {
+        const body = {
+          provider_id: id,
+          date,
+        };
+
+        const teste = await api.post('/appointments/delete', body);
+      } catch (error) {}
+    },
+    [],
+  );
 
   useEffect(() => {
     api
-      .get(`/providers/${user.id}/month-availability`, {
-        params: {
-          year: currentMonth.getFullYear(),
-          month: currentMonth.getMonth() + 1,
-        },
-      })
-      .then((response) => {
-        setMonthAvailability(response.data);
-      });
-  }, [currentMonth, user.id]);
-
-  useEffect(() => {
-    api
-      .get<Appointment[]>('/appointments/me', {
+      .get<UserAppointmentReturnDTO[]>('/appointments/user/me', {
         params: {
           year: selectedDate.getFullYear(),
           month: selectedDate.getMonth() + 1,
@@ -113,50 +133,14 @@ const Dashboard: React.FC = () => {
           return {
             ...appointment,
             hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
+            dataFormatted: format(parseISO(appointment.date), 'dd/MM/yyyy'),
           };
         });
 
         setAppointments(appointmentsFormatted);
       });
-  }, [selectedDate]);
-
-  const morningAvailability = useMemo(() => {
-    return availability
-      .filter(({ hour }) => hour < 12)
-      .map(({ hour, available }) => {
-        return {
-          hour,
-          available,
-          hourFormatted: format(new Date().setHours(hour), 'HH:00'),
-        };
-      });
-  }, [availability]);
-
-  const afternoonAvailability = useMemo(() => {
-    return availability
-      .filter(({ hour }) => hour >= 12)
-      .map(({ hour, available }) => {
-        return {
-          hour,
-          available,
-          hourFormatted: format(new Date().setHours(hour), 'HH:00'),
-        };
-      });
-  }, [availability]);
-
-  const disabledDays = useMemo(() => {
-    const dates = monthAvailability
-      .filter((monthDay) => monthDay.available === false)
-      .map((monthDay) => {
-        const year = currentMonth.getFullYear();
-        const month = currentMonth.getMonth();
-        const date = new Date(year, month, monthDay.day);
-
-        return date;
-      });
-
-    return dates;
-  }, [currentMonth, monthAvailability]);
+    console.log(appointments);
+  }, [selectedDate, appointments]);
 
   const selectedDateAsText = useMemo(() => {
     return format(selectedDate, "'Dia' dd 'de' MMMM", { locale: ptBr });
@@ -165,18 +149,6 @@ const Dashboard: React.FC = () => {
   const selectedWeekDay = useMemo(() => {
     return format(selectedDate, 'cccc', { locale: ptBr });
   }, [selectedDate]);
-
-  const morningAppointments = useMemo(() => {
-    return appointments.filter((appointment) => {
-      return parseISO(appointment.date).getHours() < 12;
-    });
-  }, [appointments]);
-
-  const afternoonAppointments = useMemo(() => {
-    return appointments.filter((appointment) => {
-      return parseISO(appointment.date).getHours() >= 12;
-    });
-  }, [appointments]);
 
   const nextAppointment = useMemo(() => {
     return appointments.find((appointment) =>
@@ -226,33 +198,24 @@ const Dashboard: React.FC = () => {
 
             <Agendamentos>
               <strong>Meus agendamentos</strong>
-
-              <div>
-                <img src={userDefaultAvatar} alt="usuario" />
-
-                <strong>Josafa de Souza Paiva Filho</strong>
-                <strong>21/03/2021</strong>
-                <strong>
-                  13:00
-                  <FiClock />
-                </strong>
-                <button type="button" onClick={signOut}>
-                  <FiTrash />
-                </button>
-              </div>
-              <div>
-                <img src={userDefaultAvatar} alt="usuario" />
-
-                <strong>Josafa de Souza Paiva Filho</strong>
-                <strong>23/04/2021</strong>
-                <strong>
-                  13:00
-                  <FiClock />
-                </strong>
-                <button type="button" onClick={signOut}>
-                  <FiTrash />
-                </button>
-              </div>
+              {appointments.map((appointment) => (
+                <div>
+                  <strong>{appointment.provider.name}</strong>
+                  <strong>{appointment.dataFormatted}</strong>
+                  <strong>
+                    {appointment.hourFormatted}
+                    <FiClock />
+                  </strong>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleRemoveAppointment(appointment.id, appointment.date)
+                    }
+                  >
+                    <FiTrash />
+                  </button>
+                </div>
+              ))}
             </Agendamentos>
           </Schedule>
         </BodyContent>
