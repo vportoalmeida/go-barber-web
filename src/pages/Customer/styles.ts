@@ -106,7 +106,7 @@ export const BodyContent = styled.div`
     width: 100%;
     justify-content: center;
     margin-top: -60px;
-    padding-right: 5%;
+    padding-right: 3%;
   }
   @media (min-width: 500px) {
     margin-bottom: 0px;
@@ -119,16 +119,18 @@ export const BodyContent = styled.div`
 
 export const Agendamentos = styled.div`
   margin-top: 6.4rem;
-  width: 600px;
+  width: 1000px;
   margin-left: 0 auto;
+  justify-content: space-between;
   @media (max-width: 600px) {
     width: 100%;
     flex-direction: column;
+    text-align: center;
   }
 
   > strong {
     color: #999591;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 400;
   }
 
@@ -140,10 +142,12 @@ export const Agendamentos = styled.div`
     border-radius: 1rem;
     margin-top: 2.4rem;
     position: relative;
+    justify-content: space-between;
+    max-width: 700px;
 
     @media (max-width: 600px) {
       width: 100%;
-      flex-direction: column;
+      margin-left: 0;
     }
 
     &::before {
@@ -154,7 +158,6 @@ export const Agendamentos = styled.div`
       content: '';
       background: #dd9f3c;
       @media (max-width: 600px) {
-        margin-top: -15px;
       }
     }
 
@@ -165,11 +168,15 @@ export const Agendamentos = styled.div`
     }
 
     strong {
-      margin-left: 2.4rem;
       color: #fff;
+      justify-content: space-between;
+      width: 200px;
+      @media (max-width: 600px) {
+        width: 300px;
+      }
       svg {
         color: #dd9f3c;
-        margin-right: 0.8rem;
+        margin-right: 0;
         margin-left: 0.4rem;
       }
     }

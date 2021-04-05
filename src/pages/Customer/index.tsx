@@ -139,7 +139,6 @@ const Dashboard: React.FC = () => {
 
         setAppointments(appointmentsFormatted);
       });
-    console.log(appointments);
   }, [selectedDate, appointments]);
 
   const selectedDateAsText = useMemo(() => {
@@ -208,8 +207,13 @@ const Dashboard: React.FC = () => {
                   </strong>
                   <button
                     type="button"
-                    onClick={() =>
-                      handleRemoveAppointment(appointment.id, appointment.date)
+                    onClick={
+                      () =>
+                        handleRemoveAppointment(
+                          appointment.id,
+                          appointment.date,
+                        )
+                      // eslint-disable-next-line react/jsx-curly-newline
                     }
                   >
                     <FiTrash />
